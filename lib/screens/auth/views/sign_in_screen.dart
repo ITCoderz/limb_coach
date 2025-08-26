@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mylimbcoach/generated/assets.dart';
 import 'package:mylimbcoach/screens/auth/controllers/auth_controller.dart';
+import 'package:mylimbcoach/screens/welcome/controllers/welcome_controller.dart';
 import 'package:mylimbcoach/utils/app_colors.dart';
 import 'package:mylimbcoach/utils/app_text_styles.dart';
 import 'package:mylimbcoach/utils/gaps.dart';
@@ -9,6 +10,7 @@ import 'package:mylimbcoach/widgets/custom_button.dart';
 import 'package:mylimbcoach/widgets/custom_textfield.dart';
 
 import 'sign_up_screen.dart';
+import 'signup_screen_amputee.dart';
 
 class SignInScreen extends StatelessWidget {
   SignInScreen({super.key});
@@ -43,8 +45,11 @@ class SignInScreen extends StatelessWidget {
                     style: AppTextStyles.getLato(12, 4.weight)),
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (_) => SignUpScreen()));
+                    if (Get.find<UserTypeController>().isAmputee()) {
+                      Get.to(() => SignUpScreenAmputee());
+                    } else {
+                      Get.to(() => SignUpScreen());
+                    }
                   },
                   child: Text("Sign Up",
                       style: AppTextStyles.getLato(
@@ -98,27 +103,45 @@ class SignInScreen extends StatelessWidget {
                 // Remember Me
                 Row(
                   children: [
-                    Obx(() => Checkbox(
-                          value: controller.rememberMe.value,
-                          activeColor: AppColors.primaryColor,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(3),
-                            side: MaterialStateBorderSide.resolveWith((states) {
-                              if (states.contains(MaterialState.focused)) {
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Obx(
+                          () => Checkbox(
+                            value: controller.rememberMe.value,
+                            activeColor: AppColors.primaryColor,
+                            side: BorderSide(
+                                color: AppColors.borderColor, width: 0.5),
+                            materialTapTargetSize: MaterialTapTargetSize
+                                .shrinkWrap, // ✅ removes extra space
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(3),
+                              side:
+                                  MaterialStateBorderSide.resolveWith((states) {
+                                if (states.contains(MaterialState.focused)) {
+                                  return BorderSide(
+                                    color: AppColors.primaryColor,
+                                    width: 1.5,
+                                  );
+                                }
                                 return BorderSide(
-                                    color: AppColors.primaryColor, width: 1.5);
-                              }
-                              return BorderSide(
                                   color:
                                       AppColors.primaryColor.withOpacity(0.1),
-                                  width: 0.5);
-                            }),
+                                  width: 0.5,
+                                );
+                              }),
+                            ),
+                            onChanged: (val) =>
+                                controller.toggleRememberMe(val ?? false),
                           ),
-                          onChanged: (val) =>
-                              controller.toggleRememberMe(val ?? false),
-                        )),
-                    Text("Remember Me",
-                        style: AppTextStyles.getLato(12, 4.weight)),
+                        ),
+                        const SizedBox(width: 6), // adjust spacing if needed
+                        Text(
+                          "Remember Me",
+                          style: AppTextStyles.getLato(12, FontWeight.w400),
+                        ),
+                      ],
+                    ),
                     const Spacer(),
                     TextButton(
                       onPressed: () {},
@@ -173,7 +196,7 @@ class SignInScreen extends StatelessWidget {
       width: 45,
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        border: Border.all(color: const Color(0xffDEDEDE)),
+        border: Border.all(color: const Color(0xffDEDEDE), width: 0.5),
         borderRadius: BorderRadius.circular(5),
       ),
       child: Image.asset(asset, width: 24, height: 24),

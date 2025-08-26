@@ -19,7 +19,7 @@ class CustomDropdownField extends StatelessWidget {
     required this.items,
     this.value,
     this.onChanged,
-    this.selectText = "Select Tags",
+    this.selectText = "Select",
     this.isViewMode = false,
   });
 
@@ -56,7 +56,7 @@ class CustomDropdownField extends StatelessWidget {
         ),
       ),
       hint: Text(
-        selectText,
+        "$selectText $fieldLabel",
         style: AppTextStyles.getLato(
           Responsive.isMobile(Get.context!) ? 13 : 14,
           4.weight,

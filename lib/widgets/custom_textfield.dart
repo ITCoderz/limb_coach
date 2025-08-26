@@ -45,7 +45,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
   Widget build(BuildContext context) {
     bool isDate = widget.label == "Date" ||
         widget.label == "From" ||
-        widget.label == "To";
+        widget.label == "To" ||
+        widget.hintText == "DD/MM/YYYY";
     return TextField(
       controller: widget.controller,
       style: AppTextStyles.getLato(

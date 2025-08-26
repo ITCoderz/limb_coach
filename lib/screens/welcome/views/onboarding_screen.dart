@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mylimbcoach/screens/auth/views/sign_in_screen.dart';
 import 'package:mylimbcoach/screens/auth/views/sign_up_screen.dart';
+import 'package:mylimbcoach/screens/auth/views/signup_screen_amputee.dart';
 import 'package:mylimbcoach/screens/welcome/controllers/onboarding_controllers.dart';
+import 'package:mylimbcoach/screens/welcome/controllers/welcome_controller.dart';
 import 'package:mylimbcoach/utils/app_colors.dart';
 import 'package:mylimbcoach/utils/app_text_styles.dart';
 import 'package:mylimbcoach/utils/gaps.dart';
@@ -123,7 +125,12 @@ class OnBoardingScreen extends StatelessWidget {
                                     ),
                                   ),
                                   onPressed: () {
-                                    Get.to(() => SignUpScreen());
+                                    if (Get.find<UserTypeController>()
+                                        .isAmputee()) {
+                                      Get.to(() => SignUpScreenAmputee());
+                                    } else {
+                                      Get.to(() => SignUpScreen());
+                                    }
                                   },
                                   child: Text(
                                     "Sign Up",

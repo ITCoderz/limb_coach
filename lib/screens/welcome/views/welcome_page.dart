@@ -13,7 +13,8 @@ class WelcomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(WelcomeController());
+    final userTypeController =
+        Get.find<UserTypeController>(); // ✅ global access
 
     return Scaffold(
       body: Padding(
@@ -45,15 +46,15 @@ class WelcomeScreen extends StatelessWidget {
                     // 👉 Amputee
                     Expanded(
                       child: GestureDetector(
-                        onTap: () => controller.selectLoginType(0),
+                        onTap: () => userTypeController.setLoginType(0),
                         child: Container(
                           height: 122,
                           decoration: BoxDecoration(
                             border: Border.all(
-                              color: controller.isSelected(0)
+                              color: userTypeController.isAmputee()
                                   ? AppColors.primaryColor
-                                  : Color(0xffDEDEDE),
-                              width: controller.isSelected(0) ? 1 : 0.5,
+                                  : const Color(0xffDEDEDE),
+                              width: userTypeController.isAmputee() ? 1 : 0.5,
                             ),
                             borderRadius: BorderRadius.circular(5),
                             color: Colors.transparent,
@@ -70,7 +71,10 @@ class WelcomeScreen extends StatelessWidget {
                                       AppColors.primaryColor.withOpacity(0.05),
                                 ),
                                 child: Center(
-                                  child: Image.asset(Assets.pngIconsAmpute),
+                                  child: Image.asset(
+                                    Assets.pngIconsAmpute,
+                                    height: 28,
+                                  ),
                                 ),
                               ),
                               5.ph,
@@ -90,15 +94,16 @@ class WelcomeScreen extends StatelessWidget {
                     // 👉 Professional
                     Expanded(
                       child: GestureDetector(
-                        onTap: () => controller.selectLoginType(1),
+                        onTap: () => userTypeController.setLoginType(1),
                         child: Container(
                           height: 122,
                           decoration: BoxDecoration(
                             border: Border.all(
-                              color: controller.isSelected(1)
+                              color: userTypeController.isProfessional()
                                   ? AppColors.primaryColor
-                                  : Color(0xffDEDEDE),
-                              width: controller.isSelected(1) ? 1 : 0.5,
+                                  : const Color(0xffDEDEDE),
+                              width:
+                                  userTypeController.isProfessional() ? 1 : 0.5,
                             ),
                             borderRadius: BorderRadius.circular(5),
                             color: Colors.transparent,
@@ -115,8 +120,10 @@ class WelcomeScreen extends StatelessWidget {
                                       AppColors.primaryColor.withOpacity(0.05),
                                 ),
                                 child: Center(
-                                  child:
-                                      Image.asset(Assets.pngIconsProfessional),
+                                  child: Image.asset(
+                                    Assets.pngIconsProfessional,
+                                    height: 28,
+                                  ),
                                 ),
                               ),
                               5.ph,
@@ -135,19 +142,18 @@ class WelcomeScreen extends StatelessWidget {
                   ],
                 )),
             const Spacer(),
-            Obx(() => CustomButton(
-                  onPressed: controller.selectedLoginType.value == -1
-                      ? () {} // disable until selection
-                      : () {
-                          // ✅ Use selected type for navigation
-                          if (controller.selectedLoginType.value == 0) {
-                            Get.to(() => const OnBoardingScreen());
-                          } else {
-                            Get.to(() => const OnBoardingScreen());
-                          }
-                        },
-                  text: "Continue",
-                )),
+            CustomButton(
+              onPressed: () {
+                if (userTypeController.loginType == 0) {
+                  // 👇 amputee flow
+                  Get.to(() => const OnBoardingScreen());
+                } else {
+                  // 👇 professional flow
+                  Get.to(() => const OnBoardingScreen());
+                }
+              },
+              text: "Continue",
+            ),
             10.ph,
           ],
         ),

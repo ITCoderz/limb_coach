@@ -45,6 +45,7 @@ dependencies:
   table_calendar:
   intl:
   video_player:
+  country_flags:
 
 dev_dependencies:
   flutter_test:

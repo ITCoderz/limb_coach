@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:mylimbcoach/screens/home/homepage/views/home_page.dart';
+import 'package:mylimbcoach/screens/home_amputee/homepage/views/home_page.dart';
+import 'package:mylimbcoach/screens/welcome/controllers/welcome_controller.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,6 +18,8 @@ void main() async {
     statusBarIconBrightness: Brightness.dark, // For Android
     statusBarBrightness: Brightness.light, // For iOS
   ));
+  Get.put(UserTypeController(), permanent: true);
+
   runApp(const MyApp());
 }
 
@@ -39,7 +42,7 @@ class MyApp extends StatelessWidget {
               surfaceTintColor: Colors.transparent,
               backgroundColor: Colors.white,
               elevation: 0)),
-      home: DashboardScreen(),
+      home: AmputeeDashboardScreen(),
     );
   }
 }

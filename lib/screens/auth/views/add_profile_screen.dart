@@ -118,6 +118,7 @@ class AddProfileScreen extends StatelessWidget {
         for (int i = 0; i < 4; i++) ...[
           Icon(
             Icons.check_circle,
+            size: 28,
             color: step >= i + 1
                 ? AppColors.primaryColor
                 : AppColors.hintColor.withOpacity(0.4),
@@ -359,6 +360,7 @@ class AddProfileScreen extends StatelessWidget {
           CustomTextField(
             label: "Consultation Fee",
             hintText: "€50.00",
+            type: TextInputType.number,
             controller: controller.consultationFeeController,
           )
       ],

@@ -1,12 +1,15 @@
 import 'package:get/get.dart';
 
-class WelcomeController extends GetxController {
-  var currentPage = 0.obs;
-  var selectedLoginType = (-1).obs;
+class UserTypeController extends GetxController {
+  // 0 = Amputee, 1 = Professional
+  var selectedLoginType = 0.obs;
 
-  void selectLoginType(int index) {
-    selectedLoginType.value = index;
+  void setLoginType(int type) {
+    selectedLoginType.value = type;
   }
 
-  bool isSelected(int index) => selectedLoginType.value == index;
+  int get loginType => selectedLoginType.value;
+
+  bool isAmputee() => selectedLoginType.value == 0;
+  bool isProfessional() => selectedLoginType.value == 1;
 }

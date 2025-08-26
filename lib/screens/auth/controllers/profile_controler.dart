@@ -9,21 +9,27 @@ import 'package:mylimbcoach/screens/auth/views/profile_completed_screen.dart';
 class ProfileController extends GetxController {
   // --- Step 1: About You ---
   final bioController = TextEditingController();
+  final reasonController = TextEditingController();
 
   // --- Step 2: Specialties & Expertise ---
   var licenseUploadProgress = 0.0.obs;
   var certificateUploadProgress = 0.0.obs;
   var licenseFileName = "".obs;
   var certificateFileName = "".obs;
+  Rx<DateTime?> selectedDate = Rx<DateTime?>(null);
+  Rx<DateTime?> selectedDateAmputee = Rx<DateTime?>(null);
 
   // --- Step 3: Consultation & Pricing ---
   var consultationType = "".obs;
   final consultationFeeController = TextEditingController();
+  final firstNameController = TextEditingController();
+  final lastNameController = TextEditingController();
 
   // --- Step 4: Contact & Location ---
   final emailController = TextEditingController();
   final phoneController = TextEditingController();
   var selectedCountry = "".obs;
+
   final locationController = TextEditingController();
 
   // --- Step Logic ---
@@ -128,6 +134,12 @@ class ProfileController extends GetxController {
     switch (currentStep.value) {
       case 1:
         isStepValid.value = bioController.text.trim().isNotEmpty;
+
+        // isStepValid.value = firstNameController.text.trim().isNotEmpty &&
+        //     lastNameController.text.isNotEmpty &&
+        //     selectedDate.value != null &&
+        //     selectedCountry.value.isNotEmpty &&
+        //     selectedGender.value.isNotEmpty;
         break;
       case 2:
         isStepValid.value = selected.isNotEmpty &&

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mylimbcoach/generated/assets.dart';
-import 'package:mylimbcoach/screens/home/homepage/views/home_page.dart';
+import 'package:mylimbcoach/screens/home_amputee/homepage/views/home_page.dart';
+import 'package:mylimbcoach/screens/home_professional/homepage/views/home_page.dart';
+import 'package:mylimbcoach/screens/home_professional/settings/views/contact_support_screen.dart';
+import 'package:mylimbcoach/screens/welcome/controllers/welcome_controller.dart';
 import 'package:mylimbcoach/utils/app_colors.dart';
 import 'package:mylimbcoach/utils/app_text_styles.dart';
 import 'package:mylimbcoach/utils/gaps.dart';
@@ -22,20 +25,26 @@ class ProfileCompletedScreen extends StatelessWidget {
                 CustomButton(
                     text: "Go to Home Page",
                     onPressed: () {
-                      Get.offAll(() => DashboardScreen());
+                      if (Get.find<UserTypeController>().isProfessional()) {
+                        Get.offAll(() => ProfessionalDashboardScreen());
+                      } else {
+                        Get.offAll(() => AmputeeDashboardScreen());
+                      }
                     }),
                 10.ph,
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(Assets.pngIconsContactSupport),
-                    GestureDetector(
-                      onTap: () {},
-                      child: Text("Contact Support",
+                InkWell(
+                  onTap: () {
+                    Get.to(() => ContactSupportScreen());
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(Assets.pngIconsContactSupport),
+                      Text("Contact Support",
                           style: AppTextStyles.getLato(
-                              12, 4.weight, AppColors.primaryColor)),
-                    )
-                  ],
+                              12, 4.weight, AppColors.primaryColor))
+                    ],
+                  ),
                 ),
               ],
             ),

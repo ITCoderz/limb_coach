@@ -1,6 +1,7 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mylimbcoach/screens/auth/views/add_profile_amputee.dart';
 import 'package:mylimbcoach/screens/auth/views/add_profile_screen.dart';
 import 'package:mylimbcoach/screens/auth/views/under_review_screen.dart';
 import 'package:mylimbcoach/widgets/custom_snackbar.dart';
@@ -15,12 +16,14 @@ class AuthController extends GetxController {
 
   // States
   var rememberMe = false.obs;
+  var terms = false.obs;
   var obscurePassword = true.obs;
   var obscureConfirmPassword = true.obs;
 
   // Validation + Button State
   var isButtonEnabled = false.obs; // for Sign In
   var isSignUpButtonEnabled = false.obs; // for Sign Up
+  var isSignUpAmputeeButtonEnabled = false.obs; // for Sign Up
   var areFilesUploaded = false.obs;
 
   @override
@@ -88,6 +91,7 @@ class AuthController extends GetxController {
 
   // --- Toggle Functions ---
   void toggleRememberMe(bool bool) => rememberMe.value = !rememberMe.value;
+  void toggleTerms(bool bool) => terms.value = !terms.value;
   void togglePassword() => obscurePassword.value = !obscurePassword.value;
   void toggleConfirmPassword() =>
       obscureConfirmPassword.value = !obscureConfirmPassword.value;
@@ -106,12 +110,33 @@ class AuthController extends GetxController {
     final password = passwordController.text.trim();
     final confirmPassword = confirmPasswordController.text.trim();
 
+    // 🔹 Debug prints
+    print("✅ Validating Sign Up Fields...");
+    print("First Name: $name");
+    print("Last Name: $lastName");
+    print("Email: $email -> Valid: ${validateEmail(email)}");
+    print(
+        "Password Length: ${password.length} -> Valid: ${validatePassword(password)}");
+    print("Confirm Password Matches: ${password == confirmPassword}");
+    print("terms: ${terms.value}");
+
     isSignUpButtonEnabled.value = name.isNotEmpty &&
         lastName.isNotEmpty &&
         validateEmail(email) &&
         validatePassword(password) &&
         password == confirmPassword;
-    print("${isSignUpButtonEnabled.value} -------------------");
+
+    isSignUpAmputeeButtonEnabled.value = name.isNotEmpty &&
+        lastName.isNotEmpty &&
+        validateEmail(email) &&
+        validatePassword(password) &&
+        password == confirmPassword &&
+        terms.value == true;
+
+    // 🔹 Final states
+    print("isSignUpButtonEnabled: ${isSignUpButtonEnabled.value}");
+    print(
+        "isSignUpAmputeeButtonEnabled: ${isSignUpAmputeeButtonEnabled.value}");
   }
 
   bool validateEmail(String email) {
@@ -138,6 +163,7 @@ class AuthController extends GetxController {
 
     // ✅ API call
     print("Signing in with $email and $password");
+
     Get.to(() => AddProfileScreen());
     // AppSnackbar.success("Success", "Signed in successfully");
   }
@@ -158,6 +184,47 @@ class AuthController extends GetxController {
     print("Signing up with $name, $email, $password");
     Get.to(() => UnderReviewScreen());
     goToNextStep();
+  }
+
+// --- Amputee Sign Up ---
+  void signUpAmputee(BuildContext context) {
+    final firstName = firstNameController.text.trim();
+    final lastName = lastNameController.text.trim();
+    final email = emailController.text.trim();
+    final password = passwordController.text.trim();
+    final confirmPassword = confirmPasswordController.text.trim();
+
+    if (firstName.isEmpty || lastName.isEmpty) {
+      AppSnackbar.error("Error", "Please enter your full name");
+      return;
+    }
+
+    if (!validateEmail(email)) {
+      AppSnackbar.error("Error", "Enter a valid email address");
+      return;
+    }
+
+    if (!validatePassword(password)) {
+      AppSnackbar.error("Error", "Password must be at least 6 characters");
+      return;
+    }
+
+    if (password != confirmPassword) {
+      AppSnackbar.error("Error", "Passwords do not match");
+      return;
+    }
+
+    if (!terms.value) {
+      AppSnackbar.error("Error", "Please accept Terms & Privacy Policy");
+      return;
+    }
+
+    // ✅ API call here (replace print with actual signup API)
+    print("Amputee signed up → $firstName $lastName, $email");
+
+    // Navigate amputee to onboarding/home
+    Get.offAll(() => AddProfileScreenAmputee());
+    // or Get.offAll(() => OnBoardingScreen());
   }
 
   // --- Step Navigation ---

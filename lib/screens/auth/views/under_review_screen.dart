@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:mylimbcoach/generated/assets.dart';
 import 'package:mylimbcoach/screens/auth/views/sign_in_screen.dart';
+import 'package:mylimbcoach/screens/home_professional/settings/views/contact_support_screen.dart';
 import 'package:mylimbcoach/utils/app_colors.dart';
 import 'package:mylimbcoach/utils/app_text_styles.dart';
 import 'package:mylimbcoach/utils/gaps.dart';
@@ -25,17 +27,19 @@ class UnderReviewScreen extends StatelessWidget {
                           MaterialPageRoute(builder: (_) => SignInScreen()));
                     }),
                 10.ph,
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(Assets.pngIconsContactSupport),
-                    GestureDetector(
-                      onTap: () {},
-                      child: Text("Contact Support",
+                InkWell(
+                  onTap: () {
+                    Get.to(() => ContactSupportScreen());
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(Assets.pngIconsContactSupport),
+                      Text("Contact Support",
                           style: AppTextStyles.getLato(
-                              12, 4.weight, AppColors.primaryColor)),
-                    )
-                  ],
+                              12, 4.weight, AppColors.primaryColor))
+                    ],
+                  ),
                 ),
               ],
             ),

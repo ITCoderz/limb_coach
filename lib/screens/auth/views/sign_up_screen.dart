@@ -105,8 +105,11 @@ class SignUpScreen extends StatelessWidget {
   Widget _stepIndicator(int step) {
     return Row(
       children: [
-        Icon(Icons.check_circle,
-            color: AppColors.primaryColor), // first always completed
+        Icon(
+          Icons.check_circle,
+          color: AppColors.primaryColor,
+          size: 28,
+        ), // first always completed
         Expanded(
           child: DottedLine(
             dashLength: 1,
@@ -119,6 +122,7 @@ class SignUpScreen extends StatelessWidget {
         ),
         Icon(
           Icons.check_circle,
+          size: 28,
           color: step == 2 ? AppColors.primaryColor : AppColors.hintColor,
         ),
       ],
