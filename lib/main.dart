@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:mylimbcoach/screens/home_amputee/browse_prosthetic/controllers/cart_controller.dart';
 import 'package:mylimbcoach/screens/home_amputee/homepage/views/home_page.dart';
 import 'package:mylimbcoach/screens/welcome/controllers/welcome_controller.dart';
 
@@ -19,6 +20,7 @@ void main() async {
     statusBarBrightness: Brightness.light, // For iOS
   ));
   Get.put(UserTypeController(), permanent: true);
+  Get.put(CartController(), permanent: true);
 
   runApp(const MyApp());
 }

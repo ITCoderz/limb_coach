@@ -123,7 +123,7 @@ class SignUpScreen extends StatelessWidget {
         Icon(
           Icons.check_circle,
           size: 28,
-          color: step == 2 ? AppColors.primaryColor : AppColors.hintColor,
+          color: step == 2 ? AppColors.primaryColor : AppColors.borderColor,
         ),
       ],
     );

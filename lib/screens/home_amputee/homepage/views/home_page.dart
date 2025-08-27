@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mylimbcoach/generated/assets.dart';
+import 'package:mylimbcoach/screens/home_amputee/browse_prosthetic/controllers/cart_controller.dart';
 import 'package:mylimbcoach/screens/home_amputee/browse_prosthetic/views/browse_prosthetic_screen.dart';
-import 'package:mylimbcoach/screens/home_amputee/browse_prosthetic/views/product_detail_screen.dart';
+import 'package:mylimbcoach/screens/home_amputee/browse_prosthetic/views/cart_screen.dart';
+import 'package:mylimbcoach/screens/home_amputee/community_forms/views/forum_screens.dart';
+import 'package:mylimbcoach/screens/home_amputee/consultation/views/consultation_screen.dart';
 import 'package:mylimbcoach/screens/home_amputee/homepage/controllers/home_page_controller.dart';
 import 'package:mylimbcoach/screens/home_amputee/homepage/views/notifications_screen.dart';
+import 'package:mylimbcoach/screens/home_amputee/track_order/views/track_order_list.dart';
 import 'package:mylimbcoach/screens/home_professional/edit_profile/views/edit_profile_screen.dart';
 import 'package:mylimbcoach/screens/home_professional/homepage/components/drawer.dart';
-import 'package:mylimbcoach/screens/home_professional/my_patients/views/my_patients.dart';
 import 'package:mylimbcoach/screens/home_professional/settings/views/settings_screen.dart';
 import 'package:mylimbcoach/screens/home_professional/start_consultation/views/call_screen.dart';
 import 'package:mylimbcoach/utils/app_colors.dart';
@@ -90,8 +93,21 @@ class AmputeeDashboardScreen extends StatelessWidget {
                                   Expanded(
                                     flex: 3,
                                     child: InkWell(
-                                      onTap: () => Get.to(() =>
-                                          ProductDetailScreen(product: c)),
+                                      onTap: () {
+                                        Get.find<CartController>()
+                                            .addToCart(c, "M", 1);
+
+                                        // ✅ Feedback
+                                        Get.snackbar(
+                                          "Added to Cart",
+                                          "${c["type"]} has been added",
+                                          snackPosition: SnackPosition.BOTTOM,
+                                          backgroundColor:
+                                              AppColors.primaryColor,
+                                          colorText: Colors.white,
+                                          margin: const EdgeInsets.all(12),
+                                        );
+                                      },
                                       child: Container(
                                         height: 30,
                                         decoration: BoxDecoration(
@@ -112,7 +128,7 @@ class AmputeeDashboardScreen extends StatelessWidget {
                                   Expanded(
                                     flex: 2,
                                     child: Container(
-                                      height: 45,
+                                      height: 30,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: AppColors.borderColor,
@@ -239,7 +255,7 @@ class AmputeeDashboardScreen extends StatelessWidget {
                 width: context.width,
                 child: GridView.count(
                   crossAxisCount: 2,
-                  childAspectRatio: 2,
+                  childAspectRatio: 1.8,
                   mainAxisSpacing: 12,
                   physics: NeverScrollableScrollPhysics(),
                   crossAxisSpacing: 12,
@@ -254,6 +270,7 @@ class AmputeeDashboardScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Row(
                             children: [
@@ -406,7 +423,7 @@ class AmputeeDashboardScreen extends StatelessWidget {
           title: "My Cart",
           onTap: () {
             Get.back();
-            // Get.to(() => RequestConsultationScreen());
+            Get.to(() => CartScreen());
           },
         ),
         DrawerItem(
@@ -430,7 +447,7 @@ class AmputeeDashboardScreen extends StatelessWidget {
           title: "My Consultations",
           onTap: () {
             Get.back();
-            // Get.to(() => AllPostContentScreen());
+            Get.to(() => ConsultationFlow());
           },
         ),
         DrawerItem(
@@ -467,7 +484,7 @@ class AmputeeDashboardScreen extends StatelessWidget {
             shrinkWrap: true,
             crossAxisCount: 2,
             crossAxisSpacing: 15,
-            childAspectRatio: 1.3,
+            childAspectRatio: 1,
             children: [
               _quickAction(
                   Assets.pngIconsBrowseProsthetic, "Browse Prosthetics", () {
@@ -475,14 +492,14 @@ class AmputeeDashboardScreen extends StatelessWidget {
               }),
               _quickAction(Assets.pngIconsBookConsultation, "Book Consultation",
                   () {
-                // Get.off(() => StartConsultation());
+                Get.off(() => ConsultationFlow());
               }),
               _quickAction(Assets.pngIconsTrackOrder, "Track Orders", () {
-                // Get.off(() => PublishContentScreen());
+                Get.off(() => TrackOrderListScreen());
               }),
               _quickAction(Assets.pngIconsCommunityForms, "Community Forms",
                   () {
-                Get.off(() => MyPatients());
+                Get.off(() => ForumScreen());
               }),
             ],
           ),

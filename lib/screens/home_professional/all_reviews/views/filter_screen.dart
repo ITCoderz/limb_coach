@@ -151,6 +151,9 @@ class ReviewFiltersScreen extends StatelessWidget {
                   children: [
                     Expanded(child: _buildCheckbox("2.0")),
                     Expanded(child: _buildCheckbox("1.0")),
+                    Expanded(
+                      child: Text(""),
+                    ),
                   ],
                 ),
               ],

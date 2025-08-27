@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -58,11 +60,19 @@ class UploadBox extends StatelessWidget {
                         ),
                       ),
                 const SizedBox(height: 15),
-                Text(
-                  progress.value > 0 ? "Uploading $title..." : "Upload $title",
-                  style: const TextStyle(
-                      fontSize: 14, fontWeight: FontWeight.w500),
-                ),
+                title == "Drag & drop your image here, or click to browse"
+                    ? Text(
+                        progress.value > 0 ? "$title..." : "$title",
+                        style: GoogleFonts.lato(
+                            fontSize: 13, fontWeight: FontWeight.w400),
+                      )
+                    : Text(
+                        progress.value > 0
+                            ? "Uploading $title..."
+                            : "Upload $title",
+                        style: GoogleFonts.lato(
+                            fontSize: 14, fontWeight: FontWeight.w500),
+                      ),
                 const SizedBox(height: 5),
                 if (progress.value > 0)
                   Padding(
@@ -119,6 +129,107 @@ class UploadBox extends StatelessWidget {
                       )
               ],
             ),
+          ),
+        ),
+      );
+    });
+  }
+}
+
+class UploadBoxSlim extends StatelessWidget {
+  final String title;
+  final VoidCallback onTap;
+  final RxDouble progress;
+  final String? desc;
+  final File? fileName;
+
+  const UploadBoxSlim({
+    super.key,
+    required this.title,
+    required this.onTap,
+    this.desc,
+    required this.progress,
+    required this.fileName,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Obx(() {
+      print(progress);
+      return DottedBorder(
+        color: AppColors.hintColor.withOpacity(0.4),
+        strokeWidth: 1,
+        borderType: BorderType.RRect,
+        radius: const Radius.circular(12),
+        dashPattern: const [6, 4],
+        child: InkWell(
+          onTap: onTap,
+          child: Container(
+            width: double.infinity,
+            padding: const EdgeInsets.symmetric(vertical: 24),
+            child: progress.value > 0.99 && fileName != null
+                ? SizedBox(
+                    height: 156,
+                    child: Image.file(
+                      File(
+                        fileName!.path,
+                      ),
+                      fit: BoxFit.cover,
+                    ))
+                : Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      progress.value > 0
+                          ? Image.asset(Assets.pngIconsUplaodSlim)
+                          : Center(
+                              child: Image.asset(
+                                Assets.pngIconsUplaodSlim,
+                                height: 48,
+                                width: 48,
+                              ),
+                            ),
+                      const SizedBox(height: 15),
+                      Text(
+                        progress.value > 0 ? "$title..." : "$title",
+                        style: GoogleFonts.lato(
+                            fontSize: 13, fontWeight: FontWeight.w400),
+                      ),
+                      const SizedBox(height: 5),
+                      progress.value == 0
+                          ? // only show instructions if nothing uploaded
+                          desc != null
+                              ? Text(
+                                  desc.toString(),
+                                  style: GoogleFonts.lato(
+                                      fontSize: 12, color: Colors.grey),
+                                )
+                              : Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "(Max file size: 5MB)",
+                                      style: GoogleFonts.lato(
+                                          fontSize: 12,
+                                          color: AppColors.hintColor),
+                                    ),
+                                  ],
+                                )
+                          : Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  height: 15,
+                                  width: 15,
+                                  child: CircularProgressIndicator(
+                                    strokeWidth: 2,
+                                  ),
+                                ),
+                                Text(
+                                    "  ${(progress * 100).toInt()}% Completed...")
+                              ],
+                            )
+                    ],
+                  ),
           ),
         ),
       );

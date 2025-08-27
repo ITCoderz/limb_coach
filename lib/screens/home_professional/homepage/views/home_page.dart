@@ -512,7 +512,7 @@ class ProfessionalDashboardScreen extends StatelessWidget {
             shrinkWrap: true,
             crossAxisCount: 2,
             crossAxisSpacing: 15,
-            childAspectRatio: 1.3,
+            childAspectRatio: 1,
             children: [
               _quickAction(
                   Assets.pngIconsManageAvailability, "Manage Availability", () {

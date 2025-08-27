@@ -86,6 +86,7 @@ class ChatScreen extends StatelessWidget {
           Flexible(
             child: Obx(() => ListView.builder(
                   padding: EdgeInsets.all(16),
+                  physics: ClampingScrollPhysics(),
                   itemCount: c.chats.length,
                   itemBuilder: (context, index) {
                     final chat = c.chats[index];

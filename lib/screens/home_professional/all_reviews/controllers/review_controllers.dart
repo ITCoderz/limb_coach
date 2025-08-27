@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mylimbcoach/widgets/custom_snackbar.dart';
@@ -38,7 +41,63 @@ class ReviewsController extends GetxController {
   void onInit() {
     super.onInit();
     _loadDummyData();
+    // listen for progress changes
+    ever(progress, (value) {
+      if (value == 1.0) {
+        AppSnackbar.success("Upload Complete", "Your file has been uploaded!");
+      }
+    });
     applyFilters();
+  }
+
+// --- Upload States ---
+  var progress = 0.0.obs; // 0.0 → not uploaded, 1.0 → done
+
+// --- File Name (picked file) ---
+  File? fileName;
+
+// --- File Picker + Upload Simulation ---
+  Future<void> pickAndUploadImage() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['png', 'jpg', 'jpeg', 'pdf'],
+    );
+
+    if (result != null && result.files.isNotEmpty) {
+      final path = result.files.single.path; // get path
+      if (path != null) {
+        fileName = File(path); // store actual File
+        await _simulateUpload(progress); // simulate upload
+      } else {
+        AppSnackbar.error("Error", "Invalid file path");
+      }
+    } else {
+      AppSnackbar.error("Error", "No file selected");
+    }
+  }
+
+  Future<void> _simulateUpload(RxDouble progress) async {
+    progress.value = 0.0;
+    for (int i = 1; i <= 100; i++) {
+      await Future.delayed(const Duration(milliseconds: 3));
+      progress.value = i / 100; // → goes up to 0.75 (75%)
+    }
+  }
+
+  void addReview(double rating, String text, {String? photoPath}) {
+    reviews.insert(
+      0,
+      Review(
+        id: DateTime.now().millisecondsSinceEpoch.toString(), // unique id
+        userName: "You",
+        image: photoPath ?? Assets.pngIconsDp, // fallback image
+        comment: text,
+        rating: rating,
+        date: DateTime.now(),
+      ),
+    );
+
+    _calculateStats(); // update stats after adding
   }
 
   void _loadDummyData() {

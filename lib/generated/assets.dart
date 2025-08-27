@@ -16,6 +16,7 @@ class Assets {
   static const String pngIconsBackIcon = 'assets/png_icons/back_icon.png';
   static const String pngIconsBell = 'assets/png_icons/bell.png';
   static const String pngIconsBell2 = 'assets/png_icons/bell2.png';
+  static const String pngIconsBigStar = 'assets/png_icons/bigStar.png';
   static const String pngIconsBionicHand = 'assets/png_icons/bionic_hand.png';
   static const String pngIconsBookConsultation =
       'assets/png_icons/book_consultation.png';
@@ -38,6 +39,7 @@ class Assets {
   static const String pngIconsDeletion = 'assets/png_icons/deletion.png';
   static const String pngIconsDp = 'assets/png_icons/dp.png';
   static const String pngIconsDp2 = 'assets/png_icons/dp2.png';
+  static const String pngIconsDr = 'assets/png_icons/dr.png';
   static const String pngIconsEndCall = 'assets/png_icons/end_call.png';
   static const String pngIconsFacebook = 'assets/png_icons/facebook.png';
   static const String pngIconsFaq = 'assets/png_icons/faq.png';
@@ -46,6 +48,7 @@ class Assets {
   static const String pngIconsGoogle = 'assets/png_icons/google.png';
   static const String pngIconsHandTransparent =
       'assets/png_icons/hand_transparent.png';
+  static const String pngIconsHistory = 'assets/png_icons/history.png';
   static const String pngIconsHome = 'assets/png_icons/home.png';
   static const String pngIconsIii = 'assets/png_icons/iii.png';
   static const String pngIconsImage1 = 'assets/png_icons/image1.png';
@@ -67,6 +70,8 @@ class Assets {
   static const String pngIconsMyPatients = 'assets/png_icons/myPatients.png';
   static const String pngIconsMyProgress = 'assets/png_icons/my_progress.png';
   static const String pngIconsMySchedule = 'assets/png_icons/my_schedule.png';
+  static const String pngIconsNotes = 'assets/png_icons/notes.png';
+  static const String pngIconsPaypal = 'assets/png_icons/paypal.png';
   static const String pngIconsPdf = 'assets/png_icons/pdf.png';
   static const String pngIconsPdfSources = 'assets/png_icons/pdf_sources.png';
   static const String pngIconsPen = 'assets/png_icons/pen.png';
@@ -75,6 +80,7 @@ class Assets {
       'assets/png_icons/phone_support.png';
   static const String pngIconsPhotoSources =
       'assets/png_icons/photo_sources.png';
+  static const String pngIconsPost = 'assets/png_icons/post.png';
   static const String pngIconsProfessional =
       'assets/png_icons/professional.png';
   static const String pngIconsProfile = 'assets/png_icons/profile.png';
@@ -86,6 +92,7 @@ class Assets {
       'assets/png_icons/publicContent.png';
   static const String pngIconsPublishSuccess =
       'assets/png_icons/publish_success.png';
+  static const String pngIconsReminder = 'assets/png_icons/reminder.png';
   static const String pngIconsReport = 'assets/png_icons/report.png';
   static const String pngIconsReportReview =
       'assets/png_icons/report_review.png';
@@ -101,11 +108,14 @@ class Assets {
   static const String pngIconsSubmitTicket =
       'assets/png_icons/submit_ticket.png';
   static const String pngIconsSummary = 'assets/png_icons/summary.png';
+  static const String pngIconsTickMark = 'assets/png_icons/tick_mark.png';
   static const String pngIconsTrackOrder = 'assets/png_icons/track_order.png';
+  static const String pngIconsUplaodSlim = 'assets/png_icons/uplaod_slim.png';
   static const String pngIconsUpload = 'assets/png_icons/upload.png';
   static const String pngIconsUserIcon = 'assets/png_icons/user_icon.png';
   static const String pngIconsVideo = 'assets/png_icons/video.png';
   static const String pngIconsVideoCall = 'assets/png_icons/videoCall.png';
+  static const String pngIconsVideocam = 'assets/png_icons/videocam.png';
   static const String svgIconsAmpute = 'assets/svg_icons/ampute.svg';
   static const String svgIconsProfessional =
       'assets/svg_icons/professional.svg';

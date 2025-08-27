@@ -13,6 +13,7 @@ class CustomTextField extends StatefulWidget {
   final bool isPassword, readOnly;
   final int maxLines;
   final int? maxLength;
+  final List<TextInputFormatter>? inputFormatters;
   final TextInputType? type;
   final void Function(String)? onChanged;
   final onTap;
@@ -27,6 +28,7 @@ class CustomTextField extends StatefulWidget {
     this.onChanged,
     this.onTap,
     this.type,
+    this.inputFormatters,
     this.readOnly = false,
     required this.hintText,
     this.isPassword = false,
@@ -54,6 +56,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         4.weight,
       ),
       maxLines: widget.maxLines,
+      inputFormatters: widget.inputFormatters,
       maxLength: widget.maxLength,
       keyboardType: widget.type,
       readOnly: widget.readOnly,
@@ -61,7 +64,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
       onChanged: widget.onChanged,
       decoration: InputDecoration(
         hintText: widget.hintText,
-        labelText: "${widget.label}*",
+        labelText: widget.label.isEmpty ? '' : "${widget.label}*",
         alignLabelWithHint: false,
         floatingLabelAlignment: FloatingLabelAlignment.start,
         floatingLabelBehavior: FloatingLabelBehavior.always,

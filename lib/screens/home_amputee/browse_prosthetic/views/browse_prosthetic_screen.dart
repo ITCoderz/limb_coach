@@ -1,10 +1,12 @@
 // lib/screens/shop/views/browse_prosthetics_screen.dart
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:mylimbcoach/generated/assets.dart';
+import 'package:mylimbcoach/screens/home_amputee/browse_prosthetic/controllers/cart_controller.dart';
 import 'package:mylimbcoach/screens/home_amputee/browse_prosthetic/controllers/product_controller.dart';
+import 'package:mylimbcoach/screens/home_amputee/browse_prosthetic/views/filter_screen.dart';
 import 'package:mylimbcoach/screens/home_amputee/browse_prosthetic/views/product_detail_screen.dart';
-import 'package:mylimbcoach/screens/home_professional/all_reviews/views/filter_screen.dart';
 import 'package:mylimbcoach/screens/home_professional/homepage/components/custom_app_bar.dart';
 import 'package:mylimbcoach/utils/app_colors.dart';
 import 'package:mylimbcoach/utils/app_text_styles.dart';
@@ -62,7 +64,7 @@ class BrowseProstheticsScreen extends StatelessWidget {
                   10.pw,
                   GestureDetector(
                     onTap: () async {
-                      final result = await Get.to(() => ReviewFiltersScreen());
+                      final result = await Get.to(() => ProductFiltersScreen());
                       if (result != null) {
                         c.selectedRatings.assignAll(result["ratings"] ?? []);
                         c.fromDate.value = result["fromDate"];
@@ -97,6 +99,26 @@ class BrowseProstheticsScreen extends StatelessWidget {
           Expanded(
             child: Obx(() {
               final list = c.filtered;
+              if (list.isEmpty) {
+                return Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(Assets.pngIconsBrowseProsthetic),
+                      const SizedBox(height: 12),
+                      Text(
+                        "No products found",
+                        style: GoogleFonts.lato(
+                          fontSize: 16,
+                          color: AppColors.hintColor,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }
+
               return Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: GridView.builder(
@@ -118,7 +140,7 @@ class BrowseProstheticsScreen extends StatelessWidget {
                 ),
               );
             }),
-          ),
+          )
         ],
       ),
     );
@@ -131,6 +153,8 @@ class _ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cart = Get.find<CartController>(); // ✅ inject CartController
+
     return Stack(
       children: [
         Container(
@@ -171,8 +195,20 @@ class _ProductCard extends StatelessWidget {
                   Expanded(
                     flex: 3,
                     child: InkWell(
-                      onTap: () =>
-                          Get.to(() => ProductDetailScreen(product: p)),
+                      onTap: () {
+                        // ✅ Add to cart with default size + qty
+                        cart.addToCart(p, "M", 1);
+
+                        // ✅ Feedback
+                        Get.snackbar(
+                          "Added to Cart",
+                          "${p["type"]} has been added",
+                          snackPosition: SnackPosition.BOTTOM,
+                          backgroundColor: AppColors.primaryColor,
+                          colorText: Colors.white,
+                          margin: const EdgeInsets.all(12),
+                        );
+                      },
                       child: Container(
                         height: 30,
                         decoration: BoxDecoration(

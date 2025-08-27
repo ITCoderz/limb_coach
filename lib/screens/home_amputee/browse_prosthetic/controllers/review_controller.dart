@@ -1,7 +1,7 @@
 // lib/screens/shop/controllers/review_controller.dart
 import 'package:get/get.dart';
 
-class ReviewController extends GetxController {
+class AmputeeReviewController extends GetxController {
   // For the selected product
   final reviews = <Map<String, dynamic>>[
     {

@@ -31,6 +31,7 @@ class ManageAvailabilityScreen extends StatelessWidget {
                   border: Border.all(color: AppColors.borderColor),
                 ),
                 child: Obx(() => TableCalendar(
+                      rowHeight: 40,
                       firstDay: DateTime.now(), // ✅ today = no past dates
                       lastDay: DateTime(2030),
                       focusedDay: c.selectedDate.value,
@@ -69,8 +70,9 @@ class ManageAvailabilityScreen extends StatelessWidget {
                       // ✅ Styling Days
                       calendarStyle: CalendarStyle(
                         // Disable default circular background completely
-                        markerMargin: EdgeInsets.all(10),
-                        cellMargin: EdgeInsets.all(10),
+                        markerMargin: EdgeInsets.all(6),
+                        cellMargin:
+                            EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                         isTodayHighlighted: true,
                         cellPadding: EdgeInsets.zero,
                         defaultDecoration: BoxDecoration(
