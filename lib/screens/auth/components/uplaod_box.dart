@@ -91,29 +91,35 @@ class UploadBox extends StatelessWidget {
                             style: GoogleFonts.lato(
                                 fontSize: 12, color: Colors.grey),
                           )
-                        : Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                "PNG, JPG or PDF (Max: 15 MB) ",
-                                style: GoogleFonts.lato(
-                                    fontSize: 12, color: Colors.grey),
-                              ),
-                              Text(
-                                "Or ",
-                                style: GoogleFonts.lato(
-                                    fontSize: 12, color: Colors.black),
-                              ),
-                              Text(
-                                "Browse",
-                                style: GoogleFonts.lato(
-                                    fontSize: 12,
-                                    color: AppColors.primaryColor,
-                                    decorationColor: AppColors.primaryColor,
-                                    decoration: TextDecoration.underline),
-                              ),
-                            ],
-                          )
+                        : title == "Image/Video"
+                            ? Text(
+                                "Supported formats: PNG, JPG, MP4, MOV (Max 200MB)",
+                                style: AppTextStyles.getLato(
+                                    12, 4.weight, AppColors.hintColor),
+                              )
+                            : Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "PNG, JPG or PDF (Max: 15 MB) ",
+                                    style: GoogleFonts.lato(
+                                        fontSize: 12, color: Colors.grey),
+                                  ),
+                                  Text(
+                                    "Or ",
+                                    style: GoogleFonts.lato(
+                                        fontSize: 12, color: Colors.black),
+                                  ),
+                                  Text(
+                                    "Browse",
+                                    style: GoogleFonts.lato(
+                                        fontSize: 12,
+                                        color: AppColors.primaryColor,
+                                        decorationColor: AppColors.primaryColor,
+                                        decoration: TextDecoration.underline),
+                                  ),
+                                ],
+                              )
                     : Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -316,7 +322,7 @@ class UploadBox2 extends StatelessWidget {
                               ),
                             ),
                           ),
-                        const SizedBox(height: 15),
+                        const SizedBox(height: 5),
                         Text(
                           uploading ? "Uploading $title..." : "Upload $title",
                           style: const TextStyle(
@@ -324,6 +330,15 @@ class UploadBox2 extends StatelessWidget {
                             fontWeight: FontWeight.w500,
                           ),
                         ),
+                        if (desc != null)
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              desc.toString(),
+                              style: AppTextStyles.getLato(
+                                  12, 4.weight, AppColors.hintColor),
+                            ),
+                          ),
                         if (uploading && fileName.value.isNotEmpty) ...[
                           const SizedBox(height: 5),
                           Text(

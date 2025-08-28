@@ -178,7 +178,7 @@ class _ProductCard extends StatelessWidget {
               10.ph,
               Text("${p["type"]}",
                   overflow: TextOverflow.ellipsis,
-                  maxLines: 2,
+                  maxLines: 1,
                   style: AppTextStyles.getLato(13, 6.weight)),
               5.ph,
               Row(

@@ -205,25 +205,6 @@ class ProductDetailScreen extends StatelessWidget {
   }
 }
 
-class _Pill extends StatelessWidget {
-  const _Pill({required this.text, this.light = false});
-  final String text;
-  final bool light;
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      decoration: BoxDecoration(
-        color: light
-            ? AppColors.hintColor.withOpacity(.08)
-            : AppColors.primaryColor.withOpacity(.08),
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Text(text, style: AppTextStyles.getLato(11, 5.weight)),
-    );
-  }
-}
-
 class _QtyBtn extends StatelessWidget {
   const _QtyBtn({required this.icon, required this.onTap});
   final IconData icon;

@@ -1,22 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mylimbcoach/screens/home_amputee/community_forms/controllers/form_controllers.dart';
 import 'package:mylimbcoach/screens/home_professional/homepage/components/custom_app_bar.dart';
 import 'package:mylimbcoach/utils/app_text_styles.dart';
 import 'package:mylimbcoach/utils/gaps.dart';
 import 'package:mylimbcoach/widgets/custom_button.dart';
 import 'package:mylimbcoach/widgets/custom_dropdown.dart';
+import 'package:mylimbcoach/widgets/custom_snackbar.dart';
 import 'package:mylimbcoach/widgets/custom_textfield.dart';
-
-import '../controllers/topic_controller.dart';
 
 class CreatePostScreen extends StatelessWidget {
   final Map<String, dynamic> topic;
-  final TopicController controller = Get.find<TopicController>();
+  final ForumController controller = Get.find<ForumController>();
 
   final TextEditingController titleCtrl = TextEditingController();
   final TextEditingController descCtrl = TextEditingController();
 
-  CreatePostScreen({required this.topic});
+  // ✅ Reactive selected topic
+  final RxString selectedTopic = "".obs;
+
+  CreatePostScreen({required this.topic}) {
+    selectedTopic.value = topic["title"]; // set default from passed topic
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,16 +37,23 @@ class CreatePostScreen extends StatelessWidget {
               style: AppTextStyles.getLato(18, 6.weight),
             ),
             25.ph,
-            CustomDropdownField(fieldLabel: "Topic", items: [
-              "New Amputee Support",
-              "Sports & Fitness",
-              "Living with Limb Loss"
-            ]),
+            Obx(() => CustomDropdownField(
+                  fieldLabel: "Topic",
+                  items: [
+                    "New Amputee Support",
+                    "Sports & Fitness",
+                    "Living with Limb Loss",
+                  ],
+                  value: selectedTopic.value,
+                  onChanged: (val) {
+                    if (val != null) selectedTopic.value = val;
+                  },
+                )),
             25.ph,
             CustomTextField(
               controller: titleCtrl,
               label: "Title",
-              hintText: 'eg., Lorem Ipsum',
+              hintText: 'eg., My journey...',
             ),
             25.ph,
             CustomTextField(
@@ -54,17 +66,18 @@ class CreatePostScreen extends StatelessWidget {
             Spacer(),
             CustomButton(
               onPressed: () {
-                if (titleCtrl.text.isNotEmpty) {
-                  controller.posts.add({
-                    "title": titleCtrl.text,
-                    "author": "You",
-                    "date": "July 20, 2025",
-                    "content": descCtrl.text,
-                    "views": "0",
-                    "likes": 0,
-                    "comments": 0,
-                  });
-                  Get.back();
+                if (titleCtrl.text.isNotEmpty &&
+                    descCtrl.text.isNotEmpty &&
+                    selectedTopic.value.isNotEmpty) {
+                  controller.addPost(
+                    topicId: topic['id'],
+                    title: titleCtrl.text,
+                    content: descCtrl.text,
+                  );
+                  Get.back(); // go back to posts screen
+                  AppSnackbar.success("Success", "Post created successfully!");
+                } else {
+                  AppSnackbar.error("⚠ Error", "Please fill all fields");
                 }
               },
               text: "Create Post",

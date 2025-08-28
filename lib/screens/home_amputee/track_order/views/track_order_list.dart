@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mylimbcoach/screens/home_amputee/track_order/conrollers/track_order_controller.dart';
+import 'package:mylimbcoach/screens/home_amputee/track_order/conrollers/order_controller.dart';
 import 'package:mylimbcoach/screens/home_amputee/track_order/views/track_order_screen.dart';
 import 'package:mylimbcoach/screens/home_professional/homepage/components/custom_app_bar.dart';
 import 'package:mylimbcoach/utils/app_colors.dart';
@@ -44,7 +44,9 @@ class TrackOrderListScreen extends StatelessWidget {
                               size: 16, color: AppColors.hintColor),
                           onTap: () {
                             controller.selectTrackingId(id);
-                            Get.to(() => TrackOrderScreen());
+                            Get.to(() => TrackOrderScreen(
+                                  isActive: true,
+                                ));
                           },
                         ),
                       );

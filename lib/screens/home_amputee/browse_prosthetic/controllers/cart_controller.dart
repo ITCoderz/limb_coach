@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:mylimbcoach/screens/home_amputee/browse_prosthetic/views/cart_screen.dart';
 
 class CartController extends GetxController {
   final items = <Map<String, dynamic>>[].obs;
@@ -38,6 +39,7 @@ class CartController extends GetxController {
       "qty": qty,
       "priceNum": priceNum,
     });
+    Get.to(() => CartScreen());
   }
 
   void removeAt(int i) {

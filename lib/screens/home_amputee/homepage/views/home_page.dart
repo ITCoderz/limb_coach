@@ -8,6 +8,7 @@ import 'package:mylimbcoach/screens/home_amputee/community_forms/views/forum_scr
 import 'package:mylimbcoach/screens/home_amputee/consultation/views/consultation_screen.dart';
 import 'package:mylimbcoach/screens/home_amputee/homepage/controllers/home_page_controller.dart';
 import 'package:mylimbcoach/screens/home_amputee/homepage/views/notifications_screen.dart';
+import 'package:mylimbcoach/screens/home_amputee/my_order/views/my_order_screen.dart';
 import 'package:mylimbcoach/screens/home_amputee/track_order/views/track_order_list.dart';
 import 'package:mylimbcoach/screens/home_professional/edit_profile/views/edit_profile_screen.dart';
 import 'package:mylimbcoach/screens/home_professional/homepage/components/drawer.dart';
@@ -415,7 +416,7 @@ class AmputeeDashboardScreen extends StatelessWidget {
           title: "My Orders",
           onTap: () {
             Get.back();
-            // Get.to(() => AllConsultationsScreen());
+            Get.to(() => MyOrderListScreen());
           },
         ),
         DrawerItem(

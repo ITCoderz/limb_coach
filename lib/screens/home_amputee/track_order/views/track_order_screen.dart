@@ -10,7 +10,8 @@ import 'package:mylimbcoach/utils/app_text_styles.dart';
 import 'package:mylimbcoach/utils/gaps.dart';
 
 class TrackOrderScreen extends StatelessWidget {
-  const TrackOrderScreen({super.key});
+  final bool isActive;
+  const TrackOrderScreen({super.key, required this.isActive});
 
   @override
   Widget build(BuildContext context) {
@@ -26,9 +27,34 @@ class TrackOrderScreen extends StatelessWidget {
             7.ph,
             infoRow('Estimated Delivery:', 'July 25 - July 28, 2025'),
             7.ph,
-            infoRow('Current Status:', "Order Placed"),
+            Row(
+              children: [
+                Text("Current Status:",
+                    style: AppTextStyles.getLato(
+                      13,
+                      4.weight,
+                    )),
+                Spacer(),
+                GestureDetector(
+                  onTap: () {
+                    Get.to(() => TrackOrderScreen(
+                          isActive: isActive,
+                        ));
+                  },
+                  child: Text(
+                    isActive ? "Order Placed" : "Delivered",
+                    style: AppTextStyles.getLato(13, 4.weight,
+                        isActive ? AppColors.primaryColor : Colors.green),
+                  ),
+                ),
+              ],
+            ),
             7.ph,
-            _Section(title: "Timeline", child: Timeline()),
+            _Section(
+                title: "Timeline",
+                child: Timeline(
+                  isActive: isActive,
+                )),
             16.ph,
             _Section(
               title: "Items in Your Order",
@@ -59,7 +85,21 @@ class TrackOrderScreen extends StatelessWidget {
                   4.ph,
                   infoRow("Method:", 'Standard Shipping'),
                   4.ph,
-                  infoRow("Tracking #:", 'ABC12345XYZ'),
+                  Row(
+                    children: [
+                      Text("Tracking #: ",
+                          style: AppTextStyles.getLato(
+                            13,
+                            4.weight,
+                          )),
+                      Spacer(),
+                      Text(
+                        'ABC12345XYZ',
+                        style: AppTextStyles.getLato(
+                            13, 4.weight, AppColors.primaryColor),
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
@@ -108,23 +148,29 @@ class Timeline extends StatelessWidget {
     ["Delivered", "Mar 25, 2025 • 3:14 PM"]
   ];
 
-  Timeline({super.key});
+  final bool isActive;
+  Timeline({super.key, required this.isActive});
 
   final TimelineController c = Get.put(TimelineController());
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => Column(
-          children: List.generate(
-            steps.length,
-            (i) => _sessionTile(
-              steps[i][0],
-              steps[i][1],
-              c.activeStepIndex.value == i, // ✅ only current step is active
-              i == steps.length - 1,
-            ),
-          ),
-        ));
+    return Column(
+        children: List.generate(
+      steps.length,
+      (i) {
+        bool active = isActive
+            ? c.activeStepIndex.value == i // only current active
+            : true; // ✅ if order inactive (past), all steps active
+
+        return _sessionTile(
+          steps[i][0],
+          steps[i][1],
+          active,
+          i == steps.length - 1,
+        );
+      },
+    ));
   }
 
   Widget _sessionTile(String title, String time, bool active, bool last) {
@@ -144,7 +190,9 @@ class Timeline extends StatelessWidget {
                   direction: Axis.vertical,
                   dashLength: 2,
                   dashGapLength: 2,
-                  dashColor: AppColors.primaryColor,
+                  dashColor: active
+                      ? AppColors.primaryColor
+                      : AppColors.hintColor.withOpacity(0.6),
                 ),
               )
           ],
@@ -153,7 +201,9 @@ class Timeline extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(title, style: AppTextStyles.getLato(14, 6.weight)),
+            Text(title,
+                style: AppTextStyles.getLato(14, 6.weight,
+                    active ? AppColors.blackColor : AppColors.hintColor)),
             5.ph,
             Text(
               time,
@@ -177,7 +227,12 @@ Widget infoRow(String label, String value) {
               13,
               4.weight,
             )),
-        Text(value, style: AppTextStyles.getLato(13, 4.weight)),
+        Expanded(
+            child: Text(
+          value,
+          style: AppTextStyles.getLato(13, 4.weight),
+          textAlign: TextAlign.right,
+        )),
       ],
     ),
   );

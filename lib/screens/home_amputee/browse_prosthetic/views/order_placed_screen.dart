@@ -46,7 +46,9 @@ class OrderPlacedScreen extends StatelessWidget {
               children: [
                 Expanded(
                   child: OutlinedButton(
-                    onPressed: () => Get.to(() => const TrackOrderScreen()),
+                    onPressed: () => Get.to(() => TrackOrderScreen(
+                          isActive: true,
+                        )),
                     style: OutlinedButton.styleFrom(
                       fixedSize: Size(context.width, 45),
                       side:

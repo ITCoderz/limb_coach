@@ -81,6 +81,7 @@ class Assets {
   static const String pngIconsPhotoSources =
       'assets/png_icons/photo_sources.png';
   static const String pngIconsPost = 'assets/png_icons/post.png';
+  static const String pngIconsProcessing = 'assets/png_icons/processing.png';
   static const String pngIconsProfessional =
       'assets/png_icons/professional.png';
   static const String pngIconsProfile = 'assets/png_icons/profile.png';
@@ -92,6 +93,7 @@ class Assets {
       'assets/png_icons/publicContent.png';
   static const String pngIconsPublishSuccess =
       'assets/png_icons/publish_success.png';
+  static const String pngIconsReceiptBG = 'assets/png_icons/receiptBG.png';
   static const String pngIconsReminder = 'assets/png_icons/reminder.png';
   static const String pngIconsReport = 'assets/png_icons/report.png';
   static const String pngIconsReportReview =

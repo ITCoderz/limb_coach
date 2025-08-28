@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoPost extends StatefulWidget {
   final String url;
-  const VideoPost({super.key, required this.url});
+  final bool network;
+  const VideoPost({super.key, required this.url, this.network = true});
 
   @override
   State<VideoPost> createState() => _VideoPostState();
@@ -16,10 +19,17 @@ class _VideoPostState extends State<VideoPost> {
   @override
   void initState() {
     super.initState();
-    _controller = VideoPlayerController.networkUrl(Uri.parse(widget.url))
-      ..initialize().then((_) {
-        setState(() {}); // refresh when ready
-      });
+    if (widget.network) {
+      _controller = VideoPlayerController.networkUrl(Uri.parse(widget.url))
+        ..initialize().then((_) {
+          setState(() {}); // refresh when ready
+        });
+    } else {
+      _controller = VideoPlayerController.file(File(widget.url))
+        ..initialize().then((_) {
+          setState(() {}); // refresh when ready
+        });
+    }
   }
 
   @override

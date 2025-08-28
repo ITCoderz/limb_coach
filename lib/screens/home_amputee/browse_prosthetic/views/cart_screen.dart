@@ -20,9 +20,32 @@ class CartScreen extends StatelessWidget {
       appBar: customAppBar("My Cart"),
       body: Obx(() {
         if (cart.items.isEmpty) {
-          return Center(
-            child: Text("Your cart is empty",
-                style: AppTextStyles.getLato(14, 4.weight)),
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                  height: 69,
+                  width: 69,
+                  decoration: BoxDecoration(
+                      color: AppColors.primaryColor.withOpacity(0.05),
+                      shape: BoxShape.circle),
+                  child: Image.asset(
+                    Assets.pngIconsMyCart,
+                  )),
+              10.ph,
+              Text(
+                "No Items in cart",
+                style: AppTextStyles.getLato(18, 6.weight),
+              ),
+              5.ph,
+              Center(
+                child: Text(
+                    'Your items will show here once you’ve add to cart them',
+                    textAlign: TextAlign.center,
+                    style: AppTextStyles.getLato(
+                        13, 5.weight, AppColors.hintColor)),
+              ),
+            ],
           );
         }
 
