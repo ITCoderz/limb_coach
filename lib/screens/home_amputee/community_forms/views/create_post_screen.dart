@@ -17,7 +17,7 @@ class CreatePostScreen extends StatelessWidget {
   final TextEditingController descCtrl = TextEditingController();
 
   // ✅ Reactive selected topic
-  final RxString selectedTopic = "".obs;
+  final selectedTopic = RxnString();
 
   CreatePostScreen({required this.topic}) {
     selectedTopic.value = topic["title"]; // set default from passed topic
@@ -68,7 +68,7 @@ class CreatePostScreen extends StatelessWidget {
               onPressed: () {
                 if (titleCtrl.text.isNotEmpty &&
                     descCtrl.text.isNotEmpty &&
-                    selectedTopic.value.isNotEmpty) {
+                    selectedTopic.value != null) {
                   controller.addPost(
                     topicId: topic['id'],
                     title: titleCtrl.text,

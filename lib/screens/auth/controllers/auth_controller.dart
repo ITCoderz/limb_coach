@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:mylimbcoach/screens/auth/views/add_profile_amputee.dart';
 import 'package:mylimbcoach/screens/auth/views/add_profile_screen.dart';
 import 'package:mylimbcoach/screens/auth/views/under_review_screen.dart';
+import 'package:mylimbcoach/screens/welcome/controllers/welcome_controller.dart';
 import 'package:mylimbcoach/widgets/custom_snackbar.dart';
 
 class AuthController extends GetxController {
@@ -26,6 +27,7 @@ class AuthController extends GetxController {
   var isSignUpAmputeeButtonEnabled = false.obs; // for Sign Up
   var areFilesUploaded = false.obs;
 
+  RxnString professionalTitle = RxnString();
   @override
   void onInit() {
     super.onInit();
@@ -163,8 +165,11 @@ class AuthController extends GetxController {
 
     // ✅ API call
     print("Signing in with $email and $password");
-
-    Get.to(() => AddProfileScreen());
+    if (Get.find<UserTypeController>().isAmputee()) {
+      Get.to(() => AddProfileScreenAmputee());
+    } else {
+      Get.to(() => AddProfileScreen());
+    }
     // AppSnackbar.success("Success", "Signed in successfully");
   }
 

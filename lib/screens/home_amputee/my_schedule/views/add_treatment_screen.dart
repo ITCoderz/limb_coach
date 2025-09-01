@@ -23,7 +23,7 @@ class AddTreatmentScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _dropdown("Treatment Type*", ["Physical Therapy"]),
+            _dropdown("Treatment Type*", ["Physical Therapy"], c.treatment),
             20.ph,
             Obx(
               () => Row(
@@ -79,9 +79,9 @@ class AddTreatmentScreen extends StatelessWidget {
               ),
             ),
             20.ph,
-            _dropdown("Duration*", ["30 Min"]),
+            _dropdown("Duration*", ["30 Min"], c.duration2),
             20.ph,
-            _dropdown("Location*", ["Rehab Clinic"]),
+            _dropdown("Location*", ["Rehab Clinic"], c.location2),
             20.ph,
             _tf(
               "Notes*",
@@ -123,11 +123,16 @@ class AddTreatmentScreen extends StatelessWidget {
     );
   }
 
-  Widget _dropdown(String label, List<String> items) => CustomDropdownField(
-        fieldLabel: label,
-        items: items,
-        onChanged: (val) {},
-      );
+  Widget _dropdown(String label, List<String> items, RxnString value) {
+    return Obx(() => CustomDropdownField(
+          fieldLabel: label,
+          items: items,
+          value: value.value,
+          onChanged: (val) {
+            value.value = val!;
+          },
+        ));
+  }
 
   Widget _tf(String label, TextEditingController c, String hint,
           {int maxLines = 1, int maxLength = 1}) =>

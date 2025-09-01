@@ -21,11 +21,12 @@ class AmputeeProfileController extends GetxController {
   // --- Step 4: Contact & Location ---
   final emailController = TextEditingController();
   final phoneController = TextEditingController();
-  var selectedCountry = "".obs;
-  var selectedGender = "".obs;
-  var selectedLevelAmputee = "".obs;
-  var upperLevelAmputee = "".obs;
-  var lowerLevelAmputee = "".obs;
+  var selectedCountry = RxnString();
+  var selectedGender = RxnString(); // instead of "".obs
+  var selectedLevelAmputee = RxnString();
+  var upperLevelAmputee = RxnString();
+  var lowerLevelAmputee = RxnString();
+  var currentProsthetic = RxnString();
   final locationController = TextEditingController();
 
   // --- Step Logic ---
@@ -162,23 +163,23 @@ class AmputeeProfileController extends GetxController {
         isStepValid.value = firstNameController.text.trim().isNotEmpty &&
             lastNameController.text.trim().isNotEmpty &&
             selectedDate.value != null &&
-            selectedCountry.value.isNotEmpty &&
-            selectedGender.value.isNotEmpty;
+            selectedCountry.value != null &&
+            selectedGender.value != null;
 
         print("🔍 Step 1 Validation:");
         print(" - First Name: ${firstNameController.text.trim().isNotEmpty}");
         print(" - Last Name: ${lastNameController.text.trim().isNotEmpty}");
         print(" - DOB Selected: ${selectedDate.value != null}");
-        print(" - Country Selected: ${selectedCountry.value.isNotEmpty}");
-        print(" - Gender Selected: ${selectedGender.value.isNotEmpty}");
+        print(" - Country Selected: ${selectedCountry.value}");
+        print(" - Gender Selected: ${selectedGender.value}");
         break;
 
       case 2: // Limb Condition
-        isStepValid.value = selectedLevelAmputee.value.isNotEmpty &&
+        isStepValid.value = selectedLevelAmputee.value != null &&
             ((selectedLevelAmputee.value == "Upper Limb Amputation" &&
-                    upperLevelAmputee.value.isNotEmpty) ||
+                    upperLevelAmputee.value != null) ||
                 (selectedLevelAmputee.value == "Lower Limb Amputation" &&
-                    lowerLevelAmputee.value.isNotEmpty)) &&
+                    lowerLevelAmputee.value != null)) &&
             selectedDateAmputee.value != null &&
             reasonController.text.trim().isNotEmpty;
 

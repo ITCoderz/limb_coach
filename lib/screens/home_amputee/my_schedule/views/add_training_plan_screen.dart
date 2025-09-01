@@ -80,7 +80,7 @@ class AddTrainingPlanScreen extends StatelessWidget {
               ),
             ),
             20.ph,
-            _dropdown("Duration*", ["30 Min", "45 Min", "60 Min"]),
+            _dropdown("Duration*", ["30 Min", "45 Min", "60 Min"], c.duration),
             20.ph,
             _tf("Notes*", notesCtrl, "Type here...", maxLines: 4),
             10.ph,
@@ -117,12 +117,15 @@ class AddTrainingPlanScreen extends StatelessWidget {
     );
   }
 
-  Widget _dropdown(String label, List<String> items) {
-    return CustomDropdownField(
-      fieldLabel: label,
-      items: items,
-      onChanged: (val) {},
-    );
+  Widget _dropdown(String label, List<String> items, RxnString value) {
+    return Obx(() => CustomDropdownField(
+          fieldLabel: label,
+          items: items,
+          value: value.value,
+          onChanged: (val) {
+            value.value = val!;
+          },
+        ));
   }
 
   Widget _tf(String label, TextEditingController ctrl, String hint,

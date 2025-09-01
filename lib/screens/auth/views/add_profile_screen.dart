@@ -387,6 +387,7 @@ class AddProfileScreen extends StatelessWidget {
         CustomDropdownField(
           fieldLabel: "Country",
           items: ["Germany", "USA", "India"],
+          value: controller.selectedCountry.value,
           onChanged: (val) => controller.selectedCountry.value = val!,
         ),
         20.ph,

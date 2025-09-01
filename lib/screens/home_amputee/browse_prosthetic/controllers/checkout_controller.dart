@@ -16,8 +16,8 @@ class CheckoutController extends GetxController {
   final cvcCtrl = TextEditingController();
 
   // Reactive values
-  final country = "".obs;
-  final city = "".obs;
+  final country = RxnString();
+  final city = RxnString();
   final shippingOption = "Standard Shipping - €15.00".obs;
   final method = "Credit Card".obs;
   var saveAddress = false.obs;
@@ -71,8 +71,8 @@ class CheckoutController extends GetxController {
     everAll([fullName, address1, country, city, state, postal], (_) {
       shippingValid.value = fullName.value.isNotEmpty &&
           address1.value.isNotEmpty &&
-          country.value.isNotEmpty &&
-          city.value.isNotEmpty &&
+          country.value != null &&
+          city.value != null &&
           state.value.isNotEmpty &&
           postal.value.isNotEmpty;
     });
@@ -107,8 +107,8 @@ class CheckoutController extends GetxController {
   void validateShipping() {
     shippingValid.value = fullNameCtrl.text.isNotEmpty &&
         addressCtrl.text.isNotEmpty &&
-        country.isNotEmpty &&
-        city.isNotEmpty &&
+        country.value != null &&
+        city.value != null &&
         stateCtrl.text.isNotEmpty &&
         postalCtrl.text.isNotEmpty;
   }

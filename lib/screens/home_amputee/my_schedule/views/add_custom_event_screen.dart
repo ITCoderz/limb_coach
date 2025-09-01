@@ -119,12 +119,15 @@ class AddCustomEventScreen extends StatelessWidget {
     );
   }
 
-  Widget _dropdown(String label, List<String> items) {
-    return CustomDropdownField(
-      fieldLabel: label,
-      items: items,
-      onChanged: (val) {},
-    );
+  Widget _dropdown(String label, List<String> items, RxString value) {
+    return Obx(() => CustomDropdownField(
+          fieldLabel: label,
+          items: items,
+          value: value.value,
+          onChanged: (val) {
+            value.value = val!;
+          },
+        ));
   }
 
   Widget _tf(String label, TextEditingController ctrl, String hint,

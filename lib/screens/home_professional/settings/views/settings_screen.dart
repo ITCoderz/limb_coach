@@ -9,6 +9,7 @@ import 'package:mylimbcoach/screens/home_professional/settings/views/faq_screen.
 import 'package:mylimbcoach/screens/home_professional/settings/views/language_screen.dart';
 import 'package:mylimbcoach/screens/home_professional/settings/views/notification_settings_screen.dart';
 import 'package:mylimbcoach/screens/welcome/views/onboarding_screen.dart';
+import 'package:mylimbcoach/screens/welcome/views/welcome_page.dart';
 import 'package:mylimbcoach/utils/app_colors.dart';
 import 'package:mylimbcoach/utils/app_text_styles.dart';
 import 'package:mylimbcoach/utils/gaps.dart';
@@ -252,7 +253,7 @@ void showLogoutDialog(BuildContext context) {
                 backgroundColor: AppColors.primaryColor,
                 borderColor: AppColors.primaryColor,
                 onPressed: () {
-                  Get.offAll(() => OnBoardingScreen());
+                  Get.offAll(() => WelcomeScreen());
                 },
                 text: "Log Out",
               ),

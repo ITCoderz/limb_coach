@@ -198,16 +198,14 @@ class EditProfileScreen extends StatelessWidget {
             hintText: "johndoe@gmail.com",
             type: TextInputType.emailAddress,
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: 20),
           CustomDropdownField(
-            value: c.professionalTitle.value.isEmpty
-                ? null
-                : c.professionalTitle.value,
+            value: c.professionalTitle.value,
             fieldLabel: "Professional Title",
             items: ["Prosthetist", "Orthotist", "Therapist"],
-            onChanged: (val) => c.professionalTitle.value = val ?? "",
+            onChanged: (val) => c.professionalTitle.value = val,
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: 20),
           Text(
             "About You:",
             style: AppTextStyles.getLato(18, 6.weight),

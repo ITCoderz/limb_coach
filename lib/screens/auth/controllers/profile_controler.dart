@@ -28,7 +28,7 @@ class ProfileController extends GetxController {
   // --- Step 4: Contact & Location ---
   final emailController = TextEditingController();
   final phoneController = TextEditingController();
-  var selectedCountry = "".obs;
+  var selectedCountry = RxnString();
 
   final locationController = TextEditingController();
 
@@ -155,7 +155,7 @@ class ProfileController extends GetxController {
       case 4:
         isStepValid.value = emailController.text.isEmail &&
             phoneController.text.trim().isNotEmpty &&
-            selectedCountry.value.isNotEmpty &&
+            selectedCountry.value != null &&
             locationController.text.trim().isNotEmpty;
         break;
       default:

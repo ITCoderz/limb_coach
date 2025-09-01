@@ -163,8 +163,11 @@ class SignUpScreen extends StatelessWidget {
           20.ph,
           CustomDropdownField(
               fieldLabel: "Professional Title",
-              onChanged: (val) {},
-              items: ['Plumber', "Electrician", "Technion"]),
+              onChanged: (val) {
+                controller.professionalTitle.value = val!;
+              },
+              value: controller.professionalTitle.value,
+              items: ["Prosthetist", "Orthotist", "Therapist"]),
           20.ph,
           CustomTextField(
               label: "Password",

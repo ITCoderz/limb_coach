@@ -226,19 +226,21 @@ class PublishContentScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                20.ph,
-                CustomButton(
-                  onPressed: c.isPublishEnabled.value ? c.publish : () {},
-                  backgroundColor: c.isPublishEnabled.value
-                      ? AppColors.primaryColor
-                      : AppColors.primaryColor.withOpacity(0.4),
-                  borderColor: c.isPublishEnabled.value
-                      ? AppColors.primaryColor
-                      : AppColors.primaryColor.withOpacity(0.4),
-                  text: "Publish Content",
-                ),
               ],
             )),
+      ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: CustomButton(
+          onPressed: c.isPublishEnabled.value ? c.publish : () {},
+          backgroundColor: c.isPublishEnabled.value
+              ? AppColors.primaryColor
+              : AppColors.primaryColor.withOpacity(0.4),
+          borderColor: c.isPublishEnabled.value
+              ? AppColors.primaryColor
+              : AppColors.primaryColor.withOpacity(0.4),
+          text: "Publish Content",
+        ),
       ),
     );
   }

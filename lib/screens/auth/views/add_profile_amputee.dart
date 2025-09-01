@@ -202,12 +202,14 @@ class AddProfileScreenAmputee extends StatelessWidget {
           20.ph,
           CustomDropdownField(
             fieldLabel: "Country",
+            value: controller.selectedCountry.value,
             items: ["Germany", "USA", "India"],
             onChanged: (val) => controller.selectedCountry.value = val!,
           ),
           20.ph,
           CustomDropdownField(
             fieldLabel: "Gender",
+            value: controller.selectedGender.value,
             items: ["Male", "Female", "Not Specified"],
             onChanged: (val) => controller.selectedGender.value = val!,
           ),
@@ -244,6 +246,7 @@ class AddProfileScreenAmputee extends StatelessWidget {
               "Upper Limb Amputation",
               "Lower Limb Amputation",
             ],
+            value: controller.selectedLevelAmputee.value,
             onChanged: (val) => controller.selectedLevelAmputee.value = val!,
           ),
           20.ph,
@@ -252,6 +255,7 @@ class AddProfileScreenAmputee extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: 20),
               child: CustomDropdownField(
                 fieldLabel: "Upper Limb Amputation",
+                value: controller.upperLevelAmputee.value,
                 items: [
                   "Partial Hand Amputation",
                   "Wrist Disarticulation",
@@ -270,6 +274,7 @@ class AddProfileScreenAmputee extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: 20),
               child: CustomDropdownField(
                 fieldLabel: "Lower Limb Amputation",
+                value: controller.lowerLevelAmputee.value,
                 items: [
                   "Partial Foot Amputation",
                   "Ankle Disarticulation",
@@ -341,6 +346,7 @@ class AddProfileScreenAmputee extends StatelessWidget {
         20.ph,
         CustomDropdownField(
           fieldLabel: "Current Prosthetic Device",
+          value: controller.currentProsthetic.value,
           items: [
             "None / Not Using",
             "Basic Prosthesis (non-microprocessor)",
@@ -349,7 +355,7 @@ class AddProfileScreenAmputee extends StatelessWidget {
             "Cosmetic / Passive Prosthesis",
             "Activity-Specific Prosthesis (e.g., sports, swimming)",
           ],
-          onChanged: (val) => controller.lowerLevelAmputee.value = val!,
+          onChanged: (val) => controller.currentProsthetic.value = val!,
         ),
         10.ph,
         Text(

@@ -8,7 +8,11 @@ class ScheduleController extends GetxController {
   Rx<DateTime> selectedDate = DateTime.now().obs;
 // Already present
   RxSet<String> repeatDays = <String>{}.obs;
-
+  RxnString duration = RxnString();
+  RxnString duration2 = RxnString();
+  RxnString treatment = RxnString();
+  RxnString location = RxnString();
+  RxnString location2 = RxnString();
   // Time slots
   final availableSlots = <String>[
     "09:00 AM",

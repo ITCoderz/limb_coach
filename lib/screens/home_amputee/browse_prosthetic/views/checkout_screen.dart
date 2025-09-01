@@ -122,6 +122,7 @@ class CheckoutScreen extends StatelessWidget {
             Expanded(
               child: CustomDropdownField(
                 fieldLabel: "Country",
+                value: cc.country.value,
                 items: ["USA", "UK", "Germany"],
                 onChanged: (v) => cc.country.value = v!,
               ),
@@ -131,6 +132,7 @@ class CheckoutScreen extends StatelessWidget {
               child: CustomDropdownField(
                 fieldLabel: "City",
                 items: ["New York", "Paris"],
+                value: cc.city.value,
                 onChanged: (v) => cc.city.value = v!,
               ),
             ),

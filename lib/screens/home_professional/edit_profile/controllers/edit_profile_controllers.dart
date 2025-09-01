@@ -15,7 +15,7 @@ class EditProfileController extends GetxController {
   final confirmPasswordController = TextEditingController();
 
   // Professional Details
-  final professionalTitle = "".obs;
+  final professionalTitle = RxnString();
   final bioController = TextEditingController();
 
   // Pricing

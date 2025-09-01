@@ -46,6 +46,7 @@ dependencies:
   intl:
   video_player:
   country_flags:
+  dropdown_button2:
 
 dev_dependencies:
   flutter_test:

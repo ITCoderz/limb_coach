@@ -259,57 +259,60 @@ class AmputeeDashboardScreen extends StatelessWidget {
                 width: context.width,
                 child: GridView.count(
                   crossAxisCount: 2,
-                  childAspectRatio: 1.8,
+                  childAspectRatio: 2,
                   mainAxisSpacing: 12,
                   physics: NeverScrollableScrollPhysics(),
                   crossAxisSpacing: 12,
                   children: controller.communityHub.map((opt) {
-                    return Container(
-                      padding: EdgeInsets.all(15),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        border: Border.all(
-                            width: 0.5, color: AppColors.borderColor),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Container(
-                                padding: EdgeInsets.all(5),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(5),
-                                    color: opt['type'] == "Trend"
-                                        ? Color(0xffF4822C).withOpacity(0.05)
-                                        : AppColors.primaryColor
-                                            .withOpacity(0.05)),
-                                child: Center(
-                                  child: Text(
-                                    opt['type']!,
-                                    style: AppTextStyles.getLato(
-                                        11,
-                                        5.weight,
-                                        opt['type'] == "Trend"
-                                            ? Color(0xffF4822C)
-                                            : AppColors.primaryColor),
+                    return GestureDetector(
+                      onTap: () {},
+                      child: Container(
+                        padding: EdgeInsets.all(15),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          border: Border.all(
+                              width: 0.5, color: AppColors.borderColor),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Container(
+                                  padding: EdgeInsets.all(5),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                      color: opt['type'] == "Trend"
+                                          ? Color(0xffF4822C).withOpacity(0.05)
+                                          : AppColors.primaryColor
+                                              .withOpacity(0.05)),
+                                  child: Center(
+                                    child: Text(
+                                      opt['type']!,
+                                      style: AppTextStyles.getLato(
+                                          11,
+                                          5.weight,
+                                          opt['type'] == "Trend"
+                                              ? Color(0xffF4822C)
+                                              : AppColors.primaryColor),
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ],
-                          ),
-                          5.ph,
-                          Text(opt["title"]!,
-                              style:
-                                  AppTextStyles.getLato(12, FontWeight.w600)),
-                          5.ph,
-                          Text(opt["replies"]!,
-                              style: AppTextStyles.getLato(
-                                  11, FontWeight.w400, AppColors.hintColor),
-                              textAlign: TextAlign.center),
-                        ],
+                              ],
+                            ),
+                            5.ph,
+                            Text(opt["title"]!,
+                                style:
+                                    AppTextStyles.getLato(12, FontWeight.w600)),
+                            5.ph,
+                            Text(opt["replies"]!,
+                                style: AppTextStyles.getLato(
+                                    11, FontWeight.w400, AppColors.hintColor),
+                                textAlign: TextAlign.center),
+                          ],
+                        ),
                       ),
                     );
                   }).toList(),
@@ -318,8 +321,10 @@ class AmputeeDashboardScreen extends StatelessWidget {
               20.ph,
               Center(
                 child: CustomButton(
-                  width: 90,
-                  onPressed: () {},
+                  width: 110,
+                  onPressed: () {
+                    Get.to(() => ForumScreen());
+                  },
                   textStyle:
                       AppTextStyles.getLato(12, 6.weight, AppColors.whiteColor),
                   text: "Go to Forms",
