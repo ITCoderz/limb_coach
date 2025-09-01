@@ -144,14 +144,23 @@ class RequestsController extends GetxController {
         "Consultation accepted successfully",
       );
     }
+    // Initially all
+    filteredConsultations.assignAll(allConsultationsRequests);
+
+    // Listen to search
+    ever(searchQuery, (_) => applyFilters());
   }
 
   void rescheduleConsultation(String id, DateTime newDate) {
     final index = allConsultationsRequests.indexWhere((e) => e.id == id);
     if (index != -1) {
       allConsultationsRequests[index].dateTime = newDate;
-      update(); // refresh GetxBuilder/Obx
     }
+    // Initially all
+    filteredConsultations.assignAll(allConsultationsRequests);
+
+    // Listen to search
+    ever(searchQuery, (_) => applyFilters());
   }
 
   var availableSlots = <String>[

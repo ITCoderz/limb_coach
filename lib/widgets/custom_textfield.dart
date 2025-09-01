@@ -50,6 +50,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         widget.label == "To" ||
         widget.hintText == "DD/MM/YYYY";
     return TextField(
+      onTap: widget.onTap,
       controller: widget.controller,
       style: AppTextStyles.getLato(
         13,
@@ -79,23 +80,29 @@ class _CustomTextFieldState extends State<CustomTextField> {
         //   fontSize: 16,
         //   fontWeight: FontWeight.w600,
         // ),
-        suffixIcon: isDate
-            ? IconButton(
-                icon: Image.asset(
-                  Assets.pngIconsCalander,
-                  height: 24,
-                ),
-                onPressed: widget.onTap,
+        suffixIcon: widget.label == "Time"
+            ? Image.asset(
+                Assets.pngIconsUpdown,
+                height: 15,
+                width: 15,
               )
-            : widget.isPassword
+            : isDate
                 ? IconButton(
-                    icon: Icon(
-                      _obscure ? Icons.visibility_off : Icons.visibility,
-                      color: Color(0xffD4D4D4),
+                    icon: Image.asset(
+                      Assets.pngIconsCalander,
+                      height: 24,
                     ),
-                    onPressed: () => setState(() => _obscure = !_obscure),
+                    onPressed: widget.onTap,
                   )
-                : null,
+                : widget.isPassword
+                    ? IconButton(
+                        icon: Icon(
+                          _obscure ? Icons.visibility_off : Icons.visibility,
+                          color: Color(0xffD4D4D4),
+                        ),
+                        onPressed: () => setState(() => _obscure = !_obscure),
+                      )
+                    : null,
         enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8),
             borderSide: BorderSide(color: Color(0xffDEDEDE), width: 0.5)),

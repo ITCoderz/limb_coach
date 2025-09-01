@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:mylimbcoach/generated/assets.dart';
 import 'package:mylimbcoach/utils/app_text_styles.dart';
 
-PreferredSizeWidget customAppBar(String title) {
+PreferredSizeWidget customAppBar(String title, {List<Widget>? widgets}) {
   return AppBar(
     backgroundColor: Colors.white,
     elevation: 0,
@@ -16,5 +16,6 @@ PreferredSizeWidget customAppBar(String title) {
       style: AppTextStyles.getLato(18, FontWeight.w600),
     ),
     centerTitle: true,
+    actions: widgets,
   );
 }

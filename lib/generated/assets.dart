@@ -3,6 +3,8 @@ class Assets {
   Assets._();
 
   static const String pngIconsAddMember = 'assets/png_icons/Add_Member.png';
+  static const String pngIconsAddTrainingPlan =
+      'assets/png_icons/add_training_plan.png';
   static const String pngIconsAdvised = 'assets/png_icons/advised.png';
   static const String pngIconsAllConsultation =
       'assets/png_icons/all_consultation.png';
@@ -12,6 +14,7 @@ class Assets {
   static const String pngIconsAllReviews = 'assets/png_icons/all_reviews.png';
   static const String pngIconsAmpute = 'assets/png_icons/ampute.png';
   static const String pngIconsApple = 'assets/png_icons/apple.png';
+  static const String pngIconsArmcircles = 'assets/png_icons/armcircles.png';
   static const String pngIconsAudioCall = 'assets/png_icons/AudioCall.png';
   static const String pngIconsBackIcon = 'assets/png_icons/back_icon.png';
   static const String pngIconsBell = 'assets/png_icons/bell.png';
@@ -35,15 +38,19 @@ class Assets {
       'assets/png_icons/contact_support.png';
   static const String pngIconsContactSupportHeader =
       'assets/png_icons/contact_support_header.png';
+  static const String pngIconsCustomEvent = 'assets/png_icons/custom_event.png';
   static const String pngIconsDelete = 'assets/png_icons/delete.png';
   static const String pngIconsDeletion = 'assets/png_icons/deletion.png';
   static const String pngIconsDp = 'assets/png_icons/dp.png';
   static const String pngIconsDp2 = 'assets/png_icons/dp2.png';
   static const String pngIconsDr = 'assets/png_icons/dr.png';
   static const String pngIconsEndCall = 'assets/png_icons/end_call.png';
+  static const String pngIconsExercise = 'assets/png_icons/exercise.png';
   static const String pngIconsFacebook = 'assets/png_icons/facebook.png';
   static const String pngIconsFaq = 'assets/png_icons/faq.png';
   static const String pngIconsFilter = 'assets/png_icons/filter.png';
+  static const String pngIconsGeneralStretching =
+      'assets/png_icons/general_stretching.png';
   static const String pngIconsGetFiles = 'assets/png_icons/get_files.png';
   static const String pngIconsGoogle = 'assets/png_icons/google.png';
   static const String pngIconsHandTransparent =
@@ -57,11 +64,13 @@ class Assets {
   static const String pngIconsLanguage = 'assets/png_icons/language.png';
   static const String pngIconsLegTransparent =
       'assets/png_icons/leg_transparent.png';
+  static const String pngIconsLegswings = 'assets/png_icons/legswings.png';
   static const String pngIconsLicence = 'assets/png_icons/licence.png';
   static const String pngIconsLogo = 'assets/png_icons/logo.png';
   static const String pngIconsLogout = 'assets/png_icons/logout.png';
   static const String pngIconsManageAvailability =
       'assets/png_icons/manageAvailability.png';
+  static const String pngIconsMedTiming = 'assets/png_icons/med_timing.png';
   static const String pngIconsMessage = 'assets/png_icons/message.png';
   static const String pngIconsMessages = 'assets/png_icons/messages.png';
   static const String pngIconsMic = 'assets/png_icons/mic.png';
@@ -104,6 +113,7 @@ class Assets {
   static const String pngIconsSendMessage =
       'assets/png_icons/send_message  .png';
   static const String pngIconsSettings = 'assets/png_icons/settings.png';
+  static const String pngIconsShare = 'assets/png_icons/share.png';
   static const String pngIconsStar = 'assets/png_icons/star.png';
   static const String pngIconsStartConsultation =
       'assets/png_icons/startConsultation.png';
@@ -112,8 +122,14 @@ class Assets {
   static const String pngIconsSummary = 'assets/png_icons/summary.png';
   static const String pngIconsTickMark = 'assets/png_icons/tick_mark.png';
   static const String pngIconsTrackOrder = 'assets/png_icons/track_order.png';
+  static const String pngIconsTrainingPen = 'assets/png_icons/training_pen.png';
+  static const String pngIconsTreatmentTherapy =
+      'assets/png_icons/treatment_therapy.png';
+  static const String pngIconsUpdown = 'assets/png_icons/updown.png';
   static const String pngIconsUplaodSlim = 'assets/png_icons/uplaod_slim.png';
   static const String pngIconsUpload = 'assets/png_icons/upload.png';
+  static const String pngIconsUploadPhoto = 'assets/png_icons/upload_photo.png';
+  static const String pngIconsUploadVideo = 'assets/png_icons/upload_video.png';
   static const String pngIconsUserIcon = 'assets/png_icons/user_icon.png';
   static const String pngIconsVideo = 'assets/png_icons/video.png';
   static const String pngIconsVideoCall = 'assets/png_icons/videoCall.png';

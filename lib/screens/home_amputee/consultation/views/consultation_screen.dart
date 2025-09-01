@@ -18,11 +18,13 @@ import '../controllers/consultation_controller.dart';
 
 class ConsultationFlow extends StatelessWidget {
   final c = Get.put(AmputeeConsultationController());
+  final String screenTitle;
+  ConsultationFlow({super.key, this.screenTitle = "Book Consultation"});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar("Book Consultation"),
+      appBar: customAppBar(screenTitle),
       body: Column(
         children: [
           _stepIndicator(),

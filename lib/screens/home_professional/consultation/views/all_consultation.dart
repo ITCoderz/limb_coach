@@ -274,7 +274,7 @@ class AllConsultationsScreen extends StatelessWidget {
                                         onPressed: () => Get.to(() =>
                                             CallScreen(
                                                 name: c.patientName,
-                                                image: Assets.pngIconsDp)),
+                                                image: c.image)),
                                         text: "Start",
                                       ),
                                     ),

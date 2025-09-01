@@ -146,7 +146,6 @@ class RequestConsultationScreen extends StatelessWidget {
 
     return Column(
       children: [
-        20.ph,
         Row(
           children: [
             Text("Total Requests", style: AppTextStyles.getLato(18, 6.weight)),

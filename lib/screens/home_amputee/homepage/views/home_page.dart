@@ -6,11 +6,14 @@ import 'package:mylimbcoach/screens/home_amputee/browse_prosthetic/views/browse_
 import 'package:mylimbcoach/screens/home_amputee/browse_prosthetic/views/cart_screen.dart';
 import 'package:mylimbcoach/screens/home_amputee/community_forms/views/forum_screens.dart';
 import 'package:mylimbcoach/screens/home_amputee/consultation/views/consultation_screen.dart';
+import 'package:mylimbcoach/screens/home_amputee/edit_profile/views/edit_profile_screen.dart';
 import 'package:mylimbcoach/screens/home_amputee/homepage/controllers/home_page_controller.dart';
 import 'package:mylimbcoach/screens/home_amputee/homepage/views/notifications_screen.dart';
+import 'package:mylimbcoach/screens/home_amputee/my_consultation_screen/views/my_consultation_screen.dart';
 import 'package:mylimbcoach/screens/home_amputee/my_order/views/my_order_screen.dart';
+import 'package:mylimbcoach/screens/home_amputee/my_progress_and_resource/views/my_progress_resource_screen.dart';
+import 'package:mylimbcoach/screens/home_amputee/my_schedule/views/my_schedule_screen.dart';
 import 'package:mylimbcoach/screens/home_amputee/track_order/views/track_order_list.dart';
-import 'package:mylimbcoach/screens/home_professional/edit_profile/views/edit_profile_screen.dart';
 import 'package:mylimbcoach/screens/home_professional/homepage/components/drawer.dart';
 import 'package:mylimbcoach/screens/home_professional/settings/views/settings_screen.dart';
 import 'package:mylimbcoach/screens/home_professional/start_consultation/views/call_screen.dart';
@@ -432,7 +435,7 @@ class AmputeeDashboardScreen extends StatelessWidget {
           title: "My Progress & Resources",
           onTap: () {
             Get.back();
-            // Get.to(() => InboxListScreen());
+            Get.to(() => MyProgressResourcesScreen());
           },
         ),
         DrawerItem(
@@ -440,7 +443,7 @@ class AmputeeDashboardScreen extends StatelessWidget {
           title: "My Schedule",
           onTap: () {
             Get.back();
-            // Get.to(() => AllReviewsScreen());
+            Get.to(() => MyScheduleScreen());
           },
         ),
         DrawerItem(
@@ -448,7 +451,7 @@ class AmputeeDashboardScreen extends StatelessWidget {
           title: "My Consultations",
           onTap: () {
             Get.back();
-            Get.to(() => ConsultationFlow());
+            Get.to(() => MyConsultationsPage());
           },
         ),
         DrawerItem(
@@ -456,7 +459,7 @@ class AmputeeDashboardScreen extends StatelessWidget {
           title: "Profile",
           onTap: () {
             Get.back();
-            Get.to(() => EditProfileScreen());
+            Get.to(() => AmputeeEditProfileScreen());
           },
         ),
         DrawerItem(
