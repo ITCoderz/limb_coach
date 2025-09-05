@@ -41,6 +41,7 @@ class SplashScreen extends StatelessWidget {
                     LinearProgressIndicator(
                       value: controller.progress.value / 100,
                       color: AppColors.primaryColor,
+                      borderRadius: BorderRadius.circular(2),
                       backgroundColor: AppColors.primaryColor.withOpacity(0.1),
                       minHeight: 6,
                     ),

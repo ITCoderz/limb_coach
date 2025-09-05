@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:mylimbcoach/screens/home_amputee/browse_prosthetic/controllers/cart_controller.dart';
-import 'package:mylimbcoach/screens/home_amputee/homepage/views/home_page.dart';
 import 'package:mylimbcoach/screens/welcome/controllers/welcome_controller.dart';
+import 'package:mylimbcoach/screens/welcome/views/splash_screen.dart'
+    show SplashScreen;
 
 import 'screens/home_amputee/my_schedule/controllers/schedule_controller.dart';
 
@@ -16,11 +17,13 @@ void main() async {
     DeviceOrientation.portraitDown,
   ]);
   // Status bar: white background, black icons
-  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-    statusBarColor: Colors.white, // Background color
-    statusBarIconBrightness: Brightness.dark, // For Android
-    statusBarBrightness: Brightness.light, // For iOS
-  ));
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      statusBarColor: Colors.white, // Background color
+      statusBarIconBrightness: Brightness.dark, // For Android
+      statusBarBrightness: Brightness.light, // For iOS
+    ),
+  );
   Get.put(UserTypeController(), permanent: true);
   Get.put(CartController(), permanent: true);
   Get.put(ScheduleController(), permanent: true);
@@ -37,17 +40,21 @@ class MyApp extends StatelessWidget {
       title: 'My Limb Coach',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-          scaffoldBackgroundColor: Colors.white,
-          colorScheme: ColorScheme.fromSeed(seedColor: Color(0xff035C8A)),
-          useMaterial3: false,
-          elevatedButtonTheme: ElevatedButtonThemeData(
-              style: ButtonStyle(
-                  backgroundColor: WidgetStatePropertyAll(Color(0xff035C8A)))),
-          appBarTheme: AppBarTheme(
-              surfaceTintColor: Colors.transparent,
-              backgroundColor: Colors.white,
-              elevation: 0)),
-      home: AmputeeDashboardScreen(),
+        scaffoldBackgroundColor: Colors.white,
+        colorScheme: ColorScheme.fromSeed(seedColor: Color(0xff035C8A)),
+        useMaterial3: false,
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ButtonStyle(
+            backgroundColor: WidgetStatePropertyAll(Color(0xff035C8A)),
+          ),
+        ),
+        appBarTheme: AppBarTheme(
+          surfaceTintColor: Colors.transparent,
+          backgroundColor: Colors.white,
+          elevation: 0,
+        ),
+      ),
+      home: SplashScreen(),
     );
   }
 }

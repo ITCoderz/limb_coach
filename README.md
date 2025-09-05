@@ -1,7 +1,9 @@
 # mylimbcoach
 
 A new Flutter project.
-
+## Flutter Sdk USE 3.35.3
+## Flutter NDk USE 27.0.12077973
+## Android SDK USE 36
 ## Getting Started
 
 This project is a starting point for a Flutter application.
