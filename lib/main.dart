@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:mylimbcoach/screens/home_amputee/browse_prosthetic/controllers/cart_controller.dart';
-import 'package:mylimbcoach/screens/home_professional/homepage/views/home_page.dart';
 import 'package:mylimbcoach/screens/welcome/controllers/welcome_controller.dart';
+import 'package:mylimbcoach/screens/welcome/views/splash_screen.dart';
 
 import 'screens/home_amputee/my_schedule/controllers/schedule_controller.dart';
 
@@ -53,7 +53,7 @@ class MyApp extends StatelessWidget {
           elevation: 0,
         ),
       ),
-      home: ProfessionalDashboardScreen(),
+      home: SplashScreen(),
     );
   }
 }
