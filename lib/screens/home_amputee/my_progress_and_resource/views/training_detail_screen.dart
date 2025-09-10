@@ -12,13 +12,16 @@ class TrainingDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar("Week 1 Mobility Exercises", widgets: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Image.asset(Assets.pngIconsShare),
-        ),
-        10.pw,
-      ]),
+      appBar: customAppBar(
+        "Week 1 Mobility Exercises",
+        widgets: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Image.asset(Assets.pngIconsShare),
+          ),
+          10.pw,
+        ],
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -27,10 +30,7 @@ class TrainingDetailScreen extends StatelessWidget {
             infoRow("Created", "July 01, 2025"),
             infoRow("Assigned By", "Dr. Emily White"),
             15.ph,
-            Text(
-              "Goal:",
-              style: AppTextStyles.getLato(16, 6.weight),
-            ),
+            Text("Goal:", style: AppTextStyles.getLato(16, 6.weight)),
             10.ph,
             Text(
               "This plan focuses on improving your range of motion and initial strength post-surgery.",
@@ -42,19 +42,11 @@ class TrainingDetailScreen extends StatelessWidget {
             Expanded(
               child: ListView(
                 children: [
-                  Text(
-                    "Warm Up:",
-                    style: AppTextStyles.getLato(16, 6.weight),
-                  ),
+                  Text("Warm Up:", style: AppTextStyles.getLato(16, 6.weight)),
                   _exerciseTile("Calf Raises", "3 sets of 10 reps"),
-                  Text(
-                    "Exercise:",
-                    style: AppTextStyles.getLato(16, 6.weight),
-                  ),
+                  Text("Exercise:", style: AppTextStyles.getLato(16, 6.weight)),
                   10.ph,
-                  Timeline(
-                    isActive: false,
-                  ),
+                  Timeline(isActive: false),
                   10.ph,
                   Text(
                     "Cool-down:",
@@ -73,19 +65,17 @@ class TrainingDetailScreen extends StatelessWidget {
   Widget _exerciseTile(String name, String detail) {
     return ListTile(
       contentPadding: EdgeInsets.zero,
-      leading: Icon(
-        Icons.check_circle,
-        color: AppColors.borderColor,
-      ),
+      leading: Icon(Icons.check_circle, color: AppColors.borderColor),
       minLeadingWidth: 25,
-      title: Text(name,
-          style: AppTextStyles.getLato(14, 6.weight, AppColors.hintColor)),
-      subtitle: Text(detail,
-          style: AppTextStyles.getLato(12, 4.weight, AppColors.hintColor)),
-      trailing: Icon(
-        Icons.info,
-        color: AppColors.primaryColor,
+      title: Text(
+        name,
+        style: AppTextStyles.getLato(14, 6.weight, AppColors.hintColor),
       ),
+      subtitle: Text(
+        detail,
+        style: AppTextStyles.getLato(12, 4.weight, AppColors.hintColor),
+      ),
+      trailing: Icon(Icons.info, color: AppColors.primaryColor),
       onTap: () => Get.dialog(_exerciseDialog(name, detail: detail)),
     );
   }
@@ -140,15 +130,9 @@ Widget _exerciseDialog(String name, {String? detail}) {
       children: [
         Row(
           children: [
-            Text(
-              name,
-              style: AppTextStyles.getLato(16, FontWeight.bold),
-            ),
+            Text(name, style: AppTextStyles.getLato(16, FontWeight.bold)),
             Spacer(),
-            GestureDetector(
-              onTap: () => Get.back(),
-              child: Icon(Icons.clear),
-            ),
+            GestureDetector(onTap: () => Get.back(), child: Icon(Icons.clear)),
           ],
         ),
         if (detail != null)
@@ -228,75 +212,82 @@ class Timeline extends StatelessWidget {
   ];
 
   final bool isActive;
-  Timeline({
-    super.key,
-    required this.isActive,
-  });
+  Timeline({super.key, required this.isActive});
 
   @override
   Widget build(BuildContext context) {
     return Column(
-        children: List.generate(
-      steps.length,
-      (i) {
+      children: List.generate(steps.length, (i) {
         bool active = false; // ✅ if order inactive (past), all steps active
 
         return _sessionTile(
-            steps[i][0], steps[i][1], active, i == steps.length - 1, () {
-          Get.dialog(_exerciseDialog(steps[i][0], detail: steps[i][1]));
-        });
-      },
-    ));
+          steps[i][0],
+          steps[i][1],
+          active,
+          i == steps.length - 1,
+          () {
+            Get.dialog(_exerciseDialog(steps[i][0], detail: steps[i][1]));
+          },
+        );
+      }),
+    );
   }
 
   Widget _sessionTile(
-      String title, String time, bool active, bool last, onTap) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Column(
-          children: [
-            Icon(
-              Icons.check_circle,
-              color: active ? AppColors.primaryColor : AppColors.borderColor,
-            ),
-            if (!last)
-              SizedBox(
-                height: 30,
-                child: DottedLine(
-                  direction: Axis.vertical,
-                  dashLength: 2,
-                  dashGapLength: 2,
-                  dashColor: active
-                      ? AppColors.primaryColor
-                      : AppColors.hintColor.withOpacity(0.6),
+    String title,
+    String time,
+    bool active,
+    bool last,
+    onTap,
+  ) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Column(
+            children: [
+              Icon(
+                Icons.check_circle,
+                color: active ? AppColors.primaryColor : AppColors.borderColor,
+              ),
+              if (!last)
+                SizedBox(
+                  height: 30,
+                  child: DottedLine(
+                    direction: Axis.vertical,
+                    dashLength: 2,
+                    dashGapLength: 2,
+                    dashColor: active
+                        ? AppColors.primaryColor
+                        : AppColors.hintColor.withOpacity(0.6),
+                  ),
                 ),
-              )
-          ],
-        ),
-        10.pw,
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(title,
-                style: AppTextStyles.getLato(14, 6.weight,
-                    active ? AppColors.blackColor : AppColors.hintColor)),
-            5.ph,
-            Text(
-              time,
-              style: AppTextStyles.getLato(12, 4.weight, AppColors.hintColor),
-            ),
-          ],
-        ),
-        Spacer(),
-        GestureDetector(
-          onTap: onTap,
-          child: Icon(
-            Icons.info,
-            color: AppColors.primaryColor,
+            ],
           ),
-        )
-      ],
+          10.pw,
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: AppTextStyles.getLato(
+                  14,
+                  6.weight,
+                  active ? AppColors.blackColor : AppColors.hintColor,
+                ),
+              ),
+              5.ph,
+              Text(
+                time,
+                style: AppTextStyles.getLato(12, 4.weight, AppColors.hintColor),
+              ),
+            ],
+          ),
+          Spacer(),
+          Icon(Icons.info, color: AppColors.primaryColor),
+        ],
+      ),
     );
   }
 }

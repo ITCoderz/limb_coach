@@ -46,310 +46,349 @@ class ProfessionalDashboardScreen extends StatelessWidget {
               _buildSearchBar(),
               10.ph,
               _sectionTitle("Today's Consultations:", onViewAll: () {}),
-              Obx(() => Column(
-                    children:
-                        List.generate(controller.consultations.length, (index) {
-                      final c = controller.consultations[index];
-                      return Container(
-                        padding: const EdgeInsets.all(12.0),
-                        margin: const EdgeInsets.symmetric(vertical: 7),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            border: Border.all(
-                                color: AppColors.borderColor, width: 0.5)),
-                        child: Column(
-                          children: [
-                            Row(
-                              children: [
-                                ClipRRect(
-                                    borderRadius: BorderRadius.circular(100),
-                                    child: Image.asset(
-                                      "${c['image']}",
-                                      height: 59,
-                                    )),
-                                10.pw,
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "${c["name"]} (${c["type"]})",
-                                        style:
-                                            AppTextStyles.getLato(13, 6.weight),
-                                      ),
-                                      5.ph,
-                                      Text(
-                                        "Amputation Type: ${c["amputation"]}",
-                                        style: AppTextStyles.getLato(
-                                            10, 4.weight, Color(0xffa6a6a6)),
-                                      ),
-                                      5.ph,
-                                      Text(
-                                        "Date & Time: ${c["date"]}",
-                                        style:
-                                            AppTextStyles.getLato(10, 4.weight),
-                                      ),
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
-                            10.ph,
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.white,
-                                      elevation: 0,
-                                      fixedSize: Size(162, 45),
-                                      side: BorderSide(
-                                          color: AppColors.primaryColor,
-                                          width: 0.5),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(5),
+              Obx(
+                () => Column(
+                  children: List.generate(controller.consultations.length, (
+                    index,
+                  ) {
+                    final c = controller.consultations[index];
+                    return Container(
+                      padding: const EdgeInsets.all(12.0),
+                      margin: const EdgeInsets.symmetric(vertical: 7),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(
+                          color: AppColors.borderColor,
+                          width: 0.5,
+                        ),
+                      ),
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(100),
+                                child: Image.asset("${c['image']}", height: 59),
+                              ),
+                              10.pw,
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "${c["name"]} (${c["type"]})",
+                                      style: AppTextStyles.getLato(
+                                        13,
+                                        6.weight,
                                       ),
                                     ),
-                                    onPressed: () {
-                                      controller.cancelConsultation(index);
-                                    },
-                                    child: Text(
-                                      "Cancel Consultation",
+                                    5.ph,
+                                    Text(
+                                      "Amputation Type: ${c["amputation"]}",
                                       style: AppTextStyles.getLato(
-                                          16, 4.weight, AppColors.primaryColor),
+                                        10,
+                                        4.weight,
+                                        Color(0xffa6a6a6),
+                                      ),
+                                    ),
+                                    5.ph,
+                                    Text(
+                                      "Date & Time: ${c["date"]}",
+                                      style: AppTextStyles.getLato(
+                                        10,
+                                        4.weight,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                          10.ph,
+                          Row(
+                            children: [
+                              Expanded(
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.white,
+                                    elevation: 0,
+                                    fixedSize: Size(172, 45),
+                                    side: BorderSide(
+                                      color: AppColors.primaryColor,
+                                      width: 0.5,
+                                    ),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(5),
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    controller.cancelConsultation(index);
+                                  },
+                                  child: Text(
+                                    "Cancel Consultation",
+                                    style: AppTextStyles.getLato(
+                                      14,
+                                      6.weight,
+                                      AppColors.primaryColor,
                                     ),
                                   ),
                                 ),
-                                10.pw,
-                                Expanded(
-                                  child: CustomButton(
-                                    onPressed: () => Get.to(() => CallScreen(
-                                        name: "${c["name"]}",
-                                        image: "${c['image']}")),
-                                    text: "Start Consultation",
+                              ),
+                              10.pw,
+                              Expanded(
+                                child: CustomButton(
+                                  onPressed: () => Get.to(
+                                    () => CallScreen(
+                                      name: "${c["name"]}",
+                                      image: "${c['image']}",
+                                    ),
                                   ),
+                                  textStyle: AppTextStyles.getLato(
+                                    14,
+                                    6.weight,
+                                    AppColors.whiteColor,
+                                  ),
+                                  text: "Start Consultation",
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    );
+                  }),
+                ),
+              ),
+              _sectionTitle("New Messages & Reviews:", onViewAll: () {}),
+              Obx(
+                () => Column(
+                  children: [
+                    ...controller.messages.map(
+                      (m) => Container(
+                        padding: const EdgeInsets.all(8.0),
+                        margin: const EdgeInsets.symmetric(vertical: 7),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(
+                            color: AppColors.borderColor,
+                            width: 0.5,
+                          ),
+                        ),
+                        child: Row(
+                          children: [
+                            Container(
+                              height: 30,
+                              width: 30,
+                              margin: EdgeInsets.all(8),
+                              padding: EdgeInsets.all(4),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5),
+                                color: AppColors.primaryColor.withOpacity(0.05),
+                              ),
+                              child: Image.asset(Assets.pngIconsMessage),
+                            ),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    m["title"]!,
+                                    style: AppTextStyles.getLato(12, 6.weight),
+                                  ),
+                                  Text(
+                                    m["desc"]!,
+                                    style: AppTextStyles.getLato(11, 4.weight),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: AppColors.primaryColor,
+                                elevation: 0,
+                                padding: EdgeInsets.zero,
+                                fixedSize: Size(59, 30),
+                                side: BorderSide(
+                                  color: AppColors.primaryColor,
+                                  width: 0.5,
+                                ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                              ),
+                              onPressed: () {},
+                              child: Text(
+                                "View",
+                                style: AppTextStyles.getLato(
+                                  12,
+                                  6.weight,
+                                  Colors.white,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    ...controller.reviews.map(
+                      (m) => Container(
+                        padding: const EdgeInsets.all(8.0),
+                        margin: const EdgeInsets.symmetric(vertical: 7),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(
+                            color: AppColors.borderColor,
+                            width: 0.5,
+                          ),
+                        ),
+                        child: Row(
+                          children: [
+                            Container(
+                              height: 30,
+                              width: 30,
+                              margin: EdgeInsets.all(8),
+                              padding: EdgeInsets.all(4),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5),
+                                color: Color(0xffFEBD17).withOpacity(0.11),
+                              ),
+                              child: Image.asset(Assets.pngIconsStar),
+                            ),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    m["title"]!,
+                                    style: AppTextStyles.getLato(12, 6.weight),
+                                  ),
+                                  Text(
+                                    m["desc"]!,
+                                    style: AppTextStyles.getLato(11, 4.weight),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: AppColors.primaryColor,
+                                elevation: 0,
+                                padding: EdgeInsets.zero,
+                                fixedSize: Size(59, 30),
+                                side: BorderSide(
+                                  color: AppColors.primaryColor,
+                                  width: 0.5,
+                                ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                              ),
+                              onPressed: () {},
+                              child: Text(
+                                "View",
+                                style: AppTextStyles.getLato(
+                                  12,
+                                  6.weight,
+                                  Colors.white,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              _sectionTitle("Trending Post Content:"),
+              Obx(
+                () => Column(
+                  children: controller.posts.map((p) {
+                    return InkWell(
+                      onTap: () {
+                        Get.to(() => PostDetailScreen(post: p));
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.all(12),
+                        margin: const EdgeInsets.symmetric(vertical: 7),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(
+                            color: AppColors.borderColor,
+                            width: 0.5,
+                          ),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Chip(
+                              label: Text(
+                                p["category"]!,
+                                style: AppTextStyles.getLato(
+                                  11,
+                                  5.weight,
+                                  AppColors.primaryColor,
+                                ),
+                              ),
+                              backgroundColor: AppColors.primaryColor
+                                  .withOpacity(0.05),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                            ),
+                            Text(
+                              p["title"]!,
+                              style: AppTextStyles.getLato(12, 6.weight),
+                            ),
+                            5.ph,
+                            Text(
+                              p["desc"]!,
+                              style: AppTextStyles.getLato(11, 4.weight),
+                            ),
+                            5.ph,
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.remove_red_eye,
+                                  size: 15,
+                                  color: AppColors.borderColor,
+                                ),
+                                5.pw,
+                                Text(
+                                  "${p["shares"]} Views",
+                                  style: AppTextStyles.getLato(11, 4.weight),
+                                ),
+                                10.pw,
+                                Icon(
+                                  Icons.favorite,
+                                  size: 15,
+                                  color: AppColors.borderColor,
+                                ),
+                                5.pw,
+                                Text(
+                                  "${p["likes"]} Likes",
+                                  style: AppTextStyles.getLato(11, 4.weight),
+                                ),
+                                10.pw,
+                                Image.asset(
+                                  Assets.pngIconsComments,
+                                  height: 18,
+                                ),
+                                5.pw,
+                                Text(
+                                  "${p["comments"]} Comments",
+                                  style: AppTextStyles.getLato(11, 4.weight),
                                 ),
                               ],
                             ),
                           ],
                         ),
-                      );
-                    }),
-                  )),
-              _sectionTitle("New Messages & Reviews:", onViewAll: () {}),
-              Obx(() => Column(
-                    children: [
-                      ...controller.messages.map((m) => Container(
-                            padding: const EdgeInsets.all(8.0),
-                            margin: const EdgeInsets.symmetric(vertical: 7),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                border: Border.all(
-                                    color: AppColors.borderColor, width: 0.5)),
-                            child: Row(
-                              children: [
-                                Container(
-                                  height: 30,
-                                  width: 30,
-                                  margin: EdgeInsets.all(8),
-                                  padding: EdgeInsets.all(4),
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(5),
-                                      color: AppColors.primaryColor
-                                          .withOpacity(0.05)),
-                                  child: Image.asset(
-                                    Assets.pngIconsMessage,
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        m["title"]!,
-                                        style:
-                                            AppTextStyles.getLato(12, 6.weight),
-                                      ),
-                                      Text(
-                                        m["desc"]!,
-                                        style:
-                                            AppTextStyles.getLato(11, 4.weight),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: AppColors.primaryColor,
-                                    elevation: 0,
-                                    padding: EdgeInsets.zero,
-                                    fixedSize: Size(59, 30),
-                                    side: BorderSide(
-                                        color: AppColors.primaryColor,
-                                        width: 0.5),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(5),
-                                    ),
-                                  ),
-                                  onPressed: () {},
-                                  child: Text(
-                                    "View",
-                                    style: AppTextStyles.getLato(
-                                        12, 6.weight, Colors.white),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          )),
-                      ...controller.reviews.map(
-                        (m) => Container(
-                          padding: const EdgeInsets.all(8.0),
-                          margin: const EdgeInsets.symmetric(vertical: 7),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              border: Border.all(
-                                  color: AppColors.borderColor, width: 0.5)),
-                          child: Row(
-                            children: [
-                              Container(
-                                height: 30,
-                                width: 30,
-                                margin: EdgeInsets.all(8),
-                                padding: EdgeInsets.all(4),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(5),
-                                    color: Color(0xffFEBD17).withOpacity(0.11)),
-                                child: Image.asset(
-                                  Assets.pngIconsStar,
-                                ),
-                              ),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      m["title"]!,
-                                      style:
-                                          AppTextStyles.getLato(12, 6.weight),
-                                    ),
-                                    Text(
-                                      m["desc"]!,
-                                      style:
-                                          AppTextStyles.getLato(11, 4.weight),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: AppColors.primaryColor,
-                                  elevation: 0,
-                                  padding: EdgeInsets.zero,
-                                  fixedSize: Size(59, 30),
-                                  side: BorderSide(
-                                      color: AppColors.primaryColor,
-                                      width: 0.5),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(5),
-                                  ),
-                                ),
-                                onPressed: () {},
-                                child: Text(
-                                  "View",
-                                  style: AppTextStyles.getLato(
-                                      12, 6.weight, Colors.white),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
                       ),
-                    ],
-                  )),
-              _sectionTitle(
-                "Trending Post Content:",
+                    );
+                  }).toList(),
+                ),
               ),
-              Obx(() => Column(
-                    children: controller.posts.map((p) {
-                      return InkWell(
-                        onTap: () {
-                          Get.to(() => PostDetailScreen(post: p));
-                        },
-                        child: Container(
-                          padding: const EdgeInsets.all(12),
-                          margin: const EdgeInsets.symmetric(vertical: 7),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              border: Border.all(
-                                  color: AppColors.borderColor, width: 0.5)),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Chip(
-                                label: Text(
-                                  p["category"]!,
-                                  style: AppTextStyles.getLato(
-                                      11, 5.weight, AppColors.primaryColor),
-                                ),
-                                backgroundColor:
-                                    AppColors.primaryColor.withOpacity(0.05),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(5)),
-                              ),
-                              Text(
-                                p["title"]!,
-                                style: AppTextStyles.getLato(12, 6.weight),
-                              ),
-                              5.ph,
-                              Text(
-                                p["desc"]!,
-                                style: AppTextStyles.getLato(11, 4.weight),
-                              ),
-                              5.ph,
-                              Row(
-                                children: [
-                                  Icon(
-                                    Icons.remove_red_eye,
-                                    size: 15,
-                                    color: AppColors.borderColor,
-                                  ),
-                                  5.pw,
-                                  Text(
-                                    "${p["shares"]} Views",
-                                    style: AppTextStyles.getLato(11, 4.weight),
-                                  ),
-                                  10.pw,
-                                  Icon(
-                                    Icons.favorite,
-                                    size: 15,
-                                    color: AppColors.borderColor,
-                                  ),
-                                  5.pw,
-                                  Text(
-                                    "${p["likes"]} Likes",
-                                    style: AppTextStyles.getLato(11, 4.weight),
-                                  ),
-                                  10.pw,
-                                  Image.asset(
-                                    Assets.pngIconsComments,
-                                    height: 18,
-                                  ),
-                                  5.pw,
-                                  Text(
-                                    "${p["comments"]} Comments",
-                                    style: AppTextStyles.getLato(11, 4.weight),
-                                  )
-                                ],
-                              )
-                            ],
-                          ),
-                        ),
-                      );
-                    }).toList(),
-                  )),
             ],
           ),
         ),
@@ -376,10 +415,7 @@ class ProfessionalDashboardScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(5),
                 color: AppColors.primaryColor.withOpacity(0.05),
               ),
-              child: Icon(
-                Icons.menu,
-                color: AppColors.primaryColor,
-              ),
+              child: Icon(Icons.menu, color: AppColors.primaryColor),
             ),
           );
         },
@@ -393,35 +429,35 @@ class ProfessionalDashboardScreen extends StatelessWidget {
       ),
       actions: [
         GestureDetector(
-            child: Container(
-              height: 40,
-              width: 40,
-              margin: EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  color: AppColors.primaryColor.withOpacity(0.05)),
-              child: Icon(
-                Icons.add,
-                size: 30,
-                color: AppColors.primaryColor,
-              ),
+          child: Container(
+            height: 40,
+            width: 40,
+            margin: EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              color: AppColors.primaryColor.withOpacity(0.05),
             ),
-            onTap: () => _showQuickActions(context)),
+            child: Icon(Icons.add, size: 30, color: AppColors.primaryColor),
+          ),
+          onTap: () => _showQuickActions(context),
+        ),
         GestureDetector(
-            child: Container(
-              height: 40,
-              width: 40,
-              margin: EdgeInsets.all(8),
-              padding: EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  color: AppColors.primaryColor.withOpacity(0.05)),
-              child: Image.asset(
-                Assets.pngIconsBell,
-                color: AppColors.primaryColor,
-              ),
+          child: Container(
+            height: 40,
+            width: 40,
+            margin: EdgeInsets.all(8),
+            padding: EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              color: AppColors.primaryColor.withOpacity(0.05),
             ),
-            onTap: () => Get.to(() => NotificationsScreen())),
+            child: Image.asset(
+              Assets.pngIconsBell,
+              color: AppColors.primaryColor,
+            ),
+          ),
+          onTap: () => Get.to(() => NotificationsScreen()),
+        ),
         10.pw,
       ],
     );
@@ -515,13 +551,19 @@ class ProfessionalDashboardScreen extends StatelessWidget {
             childAspectRatio: 1,
             children: [
               _quickAction(
-                  Assets.pngIconsManageAvailability, "Manage Availability", () {
-                Get.off(() => ManageAvailabilityScreen());
-              }),
+                Assets.pngIconsManageAvailability,
+                "Manage Availability",
+                () {
+                  Get.off(() => ManageAvailabilityScreen());
+                },
+              ),
               _quickAction(
-                  Assets.pngIconsStartConsultation, "Start Consultation", () {
-                Get.off(() => StartConsultation());
-              }),
+                Assets.pngIconsStartConsultation,
+                "Start Consultation",
+                () {
+                  Get.off(() => StartConsultation());
+                },
+              ),
               _quickAction(Assets.pngIconsPublicContent, "Publish Content", () {
                 Get.off(() => PublishContentScreen());
               }),
@@ -542,8 +584,9 @@ class ProfessionalDashboardScreen extends StatelessWidget {
         padding: const EdgeInsets.all(12),
         margin: const EdgeInsets.symmetric(vertical: 7),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5),
-            border: Border.all(color: AppColors.borderColor, width: 0.5)),
+          borderRadius: BorderRadius.circular(5),
+          border: Border.all(color: AppColors.borderColor, width: 0.5),
+        ),
         child: Center(
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -571,13 +614,20 @@ class ProfessionalDashboardScreen extends StatelessWidget {
           Text(title, style: AppTextStyles.getLato(16, 6.weight)),
           if (onViewAll != null)
             GestureDetector(
-                onTap: onViewAll,
-                child: Text("View All",
-                    style: AppTextStyles.getLato(
-                            12, 5.weight, AppColors.primaryColor)
-                        .copyWith(
-                            decoration: TextDecoration.underline,
-                            decorationColor: AppColors.primaryColor))),
+              onTap: onViewAll,
+              child: Text(
+                "View All",
+                style:
+                    AppTextStyles.getLato(
+                      12,
+                      5.weight,
+                      AppColors.primaryColor,
+                    ).copyWith(
+                      decoration: TextDecoration.underline,
+                      decorationColor: AppColors.primaryColor,
+                    ),
+              ),
+            ),
         ],
       ),
     );
@@ -590,10 +640,7 @@ class ProfessionalDashboardScreen extends StatelessWidget {
         decoration: InputDecoration(
           hintText: 'Search Here...',
           hintStyle: AppTextStyles.getLato(13, 4.weight, Color(0xffA6A6A6)),
-          prefixIcon: Icon(
-            Icons.search,
-            color: Color(0xffA6A6A6),
-          ),
+          prefixIcon: Icon(Icons.search, color: Color(0xffA6A6A6)),
           filled: false,
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(5),

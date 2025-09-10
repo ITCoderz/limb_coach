@@ -1,6 +1,7 @@
 // filter_screen.dart
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mylimbcoach/screens/home_professional/homepage/components/custom_app_bar.dart';
 import 'package:mylimbcoach/utils/app_colors.dart';
 import 'package:mylimbcoach/utils/app_text_styles.dart';
 import 'package:mylimbcoach/utils/gaps.dart';
@@ -39,14 +40,16 @@ class ConsultationFiltersScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Filters")),
+      appBar: customAppBar("Filters"),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Filter By Category:",
-                style: AppTextStyles.getLato(14, 5.weight)),
+            Text(
+              "Filter By Category:",
+              style: AppTextStyles.getLato(14, 5.weight),
+            ),
             10.ph,
             Column(
               children: [
@@ -57,18 +60,25 @@ class ConsultationFiltersScreen extends StatelessWidget {
                   childAspectRatio: 6,
                   children: categories
                       .take(4)
-                      .map((cat) =>
-                          _cb(cat, c.selectedCategories, c.toggleCategory))
+                      .map(
+                        (cat) =>
+                            _cb(cat, c.selectedCategories, c.toggleCategory),
+                      )
                       .toList(),
                 ),
                 10.ph,
-                ...categories.skip(4).map(
-                    (cat) => _cb(cat, c.selectedCategories, c.toggleCategory)),
+                ...categories
+                    .skip(4)
+                    .map(
+                      (cat) => _cb(cat, c.selectedCategories, c.toggleCategory),
+                    ),
               ],
             ),
             30.ph,
-            Text("Filter By Ratings:",
-                style: AppTextStyles.getLato(14, 5.weight)),
+            Text(
+              "Filter By Ratings:",
+              style: AppTextStyles.getLato(14, 5.weight),
+            ),
             10.ph,
             GridView.count(
               crossAxisCount: 3,
@@ -76,8 +86,14 @@ class ConsultationFiltersScreen extends StatelessWidget {
               physics: const NeverScrollableScrollPhysics(),
               childAspectRatio: 3,
               children: ratings
-                  .map((r) =>
-                      _cb(r, c.selectedRatings, c.toggleRating, showStar: true))
+                  .map(
+                    (r) => _cb(
+                      r,
+                      c.selectedRatings,
+                      c.toggleRating,
+                      showStar: true,
+                    ),
+                  )
                   .toList(),
             ),
           ],
@@ -89,41 +105,50 @@ class ConsultationFiltersScreen extends StatelessWidget {
           text: "Apply Filter",
           onPressed: () {
             // ✅ return plain lists
-            Get.back(result: {
-              "categories": c.selectedCategories.toList(),
-              "ratings": c.selectedRatings.toList(),
-            });
+            Get.back(
+              result: {
+                "categories": c.selectedCategories.toList(),
+                "ratings": c.selectedRatings.toList(),
+              },
+            );
           },
         ),
       ),
     );
   }
 
-  Widget _cb(String label, RxList<String> list, Function(String) onTap,
-      {bool showStar = false}) {
-    return Obx(() => InkWell(
-          onTap: () => onTap(label),
-          child: Row(
-            children: [
-              Checkbox(
-                value: list.contains(label),
-                onChanged: (_) => onTap(label),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5)),
-                activeColor: AppColors.primaryColor,
-                side: BorderSide(color: AppColors.borderColor, width: 0.5),
-                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                visualDensity: VisualDensity.compact,
+  Widget _cb(
+    String label,
+    RxList<String> list,
+    Function(String) onTap, {
+    bool showStar = false,
+  }) {
+    return Obx(
+      () => InkWell(
+        onTap: () => onTap(label),
+        child: Row(
+          children: [
+            Checkbox(
+              value: list.contains(label),
+              onChanged: (_) => onTap(label),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5),
               ),
-              if (showStar) ...[
-                Image.asset(Assets.pngIconsStar, height: 16),
-                5.pw,
-              ],
-              Expanded(
-                  child:
-                      Text(label, style: AppTextStyles.getLato(12, 4.weight))),
+              activeColor: AppColors.primaryColor,
+              side: BorderSide(color: AppColors.borderColor, width: 0.5),
+              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              visualDensity: VisualDensity.compact,
+            ),
+            if (showStar) ...[
+              Image.asset(Assets.pngIconsStar, height: 16),
+              5.pw,
             ],
-          ),
-        ));
+            Expanded(
+              child: Text(label, style: AppTextStyles.getLato(12, 4.weight)),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

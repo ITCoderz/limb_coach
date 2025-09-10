@@ -112,6 +112,8 @@ class Assets {
   static const String pngIconsSave = 'assets/png_icons/save.png';
   static const String pngIconsSendMessage =
       'assets/png_icons/send_message  .png';
+  static const String pngIconsSendMessageBlue =
+      'assets/png_icons/send_messageBlue.png';
   static const String pngIconsSettings = 'assets/png_icons/settings.png';
   static const String pngIconsShare = 'assets/png_icons/share.png';
   static const String pngIconsStar = 'assets/png_icons/star.png';
