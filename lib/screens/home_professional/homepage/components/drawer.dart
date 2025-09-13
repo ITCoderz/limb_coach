@@ -10,11 +10,7 @@ class DrawerItem {
   final String title;
   final VoidCallback onTap;
 
-  DrawerItem({
-    required this.icon,
-    required this.title,
-    required this.onTap,
-  });
+  DrawerItem({required this.icon, required this.title, required this.onTap});
 }
 
 /// 🔹 Side Menu Widget
@@ -28,7 +24,7 @@ Widget sideMenu({
       padding: EdgeInsets.zero,
       children: [
         SizedBox(
-          height: 170,
+          height: 190,
           child: DrawerHeader(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -43,19 +39,18 @@ Widget sideMenu({
         ),
         // Generate all items dynamically
         ...items
-            .map((item) => Padding(
-                  padding: const EdgeInsets.only(left: 10),
-                  child: _drawerItem(item),
-                ))
+            .map(
+              (item) => Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: _drawerItem(item),
+              ),
+            )
             .toList(),
         const Divider(),
         Padding(
           padding: const EdgeInsets.only(left: 10),
           child: ListTile(
-            leading: Image.asset(
-              Assets.pngIconsLogout,
-              height: 35,
-            ),
+            leading: Image.asset(Assets.pngIconsLogout, height: 35),
             title: Text(
               "Log Out",
               style: AppTextStyles.getLato(14, 4.weight, AppColors.redColor),
@@ -71,15 +66,8 @@ Widget sideMenu({
 /// 🔹 Drawer Item Widget
 Widget _drawerItem(DrawerItem item) {
   return ListTile(
-    leading: Image.asset(
-      item.icon,
-      color: AppColors.primaryColor,
-      height: 35,
-    ),
-    title: Text(
-      item.title,
-      style: AppTextStyles.getLato(14, 4.weight),
-    ),
+    leading: Image.asset(item.icon, color: AppColors.primaryColor, height: 35),
+    title: Text(item.title, style: AppTextStyles.getLato(14, 4.weight)),
     onTap: item.onTap,
   );
 }

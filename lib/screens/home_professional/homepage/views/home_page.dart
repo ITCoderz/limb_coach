@@ -112,6 +112,7 @@ class ProfessionalDashboardScreen extends StatelessWidget {
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: Colors.white,
+                                    padding: EdgeInsets.zero,
                                     elevation: 0,
                                     fixedSize: Size(172, 45),
                                     side: BorderSide(
@@ -592,7 +593,7 @@ class ProfessionalDashboardScreen extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Image.asset(icon, height: 35),
-              SizedBox(height: 8),
+              SizedBox(height: 5),
               Text(
                 label,
                 textAlign: TextAlign.center,

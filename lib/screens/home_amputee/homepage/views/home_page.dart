@@ -46,277 +46,303 @@ class AmputeeDashboardScreen extends StatelessWidget {
               _buildSearchBar(),
               10.ph,
               _sectionTitle("Recommended Products:", onViewAll: () {}),
-              Obx(() => SizedBox(
-                    height: 230, // 👈 adjust height based on your card size
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      padding: EdgeInsets.zero,
-                      physics: BouncingScrollPhysics(),
-                      itemCount: controller.recommendedProducts.length,
-                      itemBuilder: (context, index) {
-                        final c = controller.recommendedProducts[index];
-                        return Container(
-                          width: (context.width / 2) - 24,
-                          padding: const EdgeInsets.all(6.0),
-                          margin: const EdgeInsets.only(
-                            right: 10,
+              Obx(
+                () => SizedBox(
+                  height: 230, // 👈 adjust height based on your card size
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    padding: EdgeInsets.zero,
+                    physics: BouncingScrollPhysics(),
+                    itemCount: controller.recommendedProducts.length,
+                    itemBuilder: (context, index) {
+                      final c = controller.recommendedProducts[index];
+                      return Container(
+                        width: (context.width / 2) - 24,
+                        padding: const EdgeInsets.all(6.0),
+                        margin: const EdgeInsets.only(right: 10),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(
+                            color: AppColors.borderColor,
+                            width: 0.5,
                           ),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            border: Border.all(
-                              color: AppColors.borderColor,
-                              width: 0.5,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(5),
+                              child: Image.asset(
+                                "${c['image']}",
+                                width: (context.width / 2) - 24,
+                              ),
                             ),
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              ClipRRect(
-                                  borderRadius: BorderRadius.circular(5),
-                                  child: Image.asset(
-                                    "${c['image']}",
-                                    width: (context.width / 2) - 24,
-                                  )),
-                              10.ph,
-                              Text(
-                                "${c["type"]}",
-                                style: AppTextStyles.getLato(13, 6.weight),
-                              ),
-                              5.ph,
-                              Text(
-                                "${c["amputation"]}",
-                                style: AppTextStyles.getLato(
-                                  10,
-                                  4.weight,
-                                ),
-                              ),
-                              10.ph,
-                              Row(
-                                children: [
-                                  Expanded(
-                                    flex: 3,
-                                    child: InkWell(
-                                      onTap: () {
-                                        Get.find<CartController>()
-                                            .addToCart(c, "M", 1);
+                            10.ph,
+                            Text(
+                              "${c["type"]}",
+                              style: AppTextStyles.getLato(13, 6.weight),
+                            ),
+                            5.ph,
+                            Text(
+                              "${c["amputation"]}",
+                              style: AppTextStyles.getLato(10, 4.weight),
+                            ),
+                            10.ph,
+                            Row(
+                              children: [
+                                Expanded(
+                                  flex: 3,
+                                  child: InkWell(
+                                    onTap: () {
+                                      Get.find<CartController>().addToCart(
+                                        c,
+                                        "M",
+                                        1,
+                                      );
 
-                                        // ✅ Feedback
-                                        Get.snackbar(
-                                          "Added to Cart",
-                                          "${c["type"]} has been added",
-                                          snackPosition: SnackPosition.BOTTOM,
-                                          backgroundColor:
-                                              AppColors.primaryColor,
-                                          colorText: Colors.white,
-                                          margin: const EdgeInsets.all(12),
-                                        );
-                                      },
-                                      child: Container(
-                                        height: 30,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(5),
-                                            color: AppColors.primaryColor),
-                                        child: Center(
-                                          child: Text(
-                                            "Add to Cart",
-                                            style: AppTextStyles.getLato(12,
-                                                6.weight, AppColors.whiteColor),
+                                      // ✅ Feedback
+                                      Get.snackbar(
+                                        "Added to Cart",
+                                        "${c["type"]} has been added",
+                                        snackPosition: SnackPosition.BOTTOM,
+                                        backgroundColor: AppColors.primaryColor,
+                                        colorText: Colors.white,
+                                        margin: const EdgeInsets.all(12),
+                                      );
+                                    },
+                                    child: Container(
+                                      height: 30,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(5),
+                                        color: AppColors.primaryColor,
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          "Add to Cart",
+                                          style: AppTextStyles.getLato(
+                                            12,
+                                            6.weight,
+                                            AppColors.whiteColor,
                                           ),
                                         ),
                                       ),
                                     ),
                                   ),
-                                  10.pw,
-                                  Expanded(
-                                    flex: 2,
-                                    child: Container(
-                                      height: 30,
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                          color: AppColors.borderColor,
-                                          width: 0.5,
-                                        ),
-                                        borderRadius: BorderRadius.circular(5),
+                                ),
+                                10.pw,
+                                Expanded(
+                                  flex: 2,
+                                  child: Container(
+                                    height: 30,
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: AppColors.borderColor,
+                                        width: 0.5,
                                       ),
-                                      child: Center(
-                                        child: Text(
-                                          "${c['price']}",
-                                          style: AppTextStyles.getLato(
-                                            11,
-                                            4.weight,
-                                            AppColors.hintColor,
-                                          ),
+                                      borderRadius: BorderRadius.circular(5),
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        "${c['price']}",
+                                        style: AppTextStyles.getLato(
+                                          11,
+                                          4.weight,
+                                          AppColors.hintColor,
                                         ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ),
+              20.ph,
+              _sectionTitle("My Next Consultation:"),
+              Obx(
+                () => Column(
+                  children: [
+                    ...controller.consultations.map(
+                      (m) => Container(
+                        padding: const EdgeInsets.all(8.0),
+                        margin: const EdgeInsets.symmetric(vertical: 7),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          border: Border.all(
+                            color: AppColors.borderColor,
+                            width: 0.5,
+                          ),
+                        ),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              height: 30,
+                              width: 30,
+                              margin: EdgeInsets.all(8),
+                              padding: EdgeInsets.all(4),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5),
+                                color: AppColors.primaryColor.withOpacity(0.05),
+                              ),
+                              child: Image.asset(
+                                Assets.pngIconsAllConsultation,
+                              ),
+                            ),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    m["appointment"]!,
+                                    style: AppTextStyles.getLato(12, 6.weight),
+                                  ),
+                                  Text(
+                                    "with ${m["name"]!}",
+                                    style: AppTextStyles.getLato(
+                                      11,
+                                      4.weight,
+                                      AppColors.hintColor,
+                                    ),
+                                  ),
+                                  5.ph,
+                                  Container(
+                                    padding: EdgeInsets.all(5),
+                                    decoration: BoxDecoration(
+                                      color: AppColors.primaryColor.withOpacity(
+                                        0.05,
+                                      ),
+                                      borderRadius: BorderRadius.circular(5),
+                                    ),
+                                    child: Text(
+                                      "${m["date"]}",
+                                      style: AppTextStyles.getLato(
+                                        10,
+                                        4.weight,
                                       ),
                                     ),
                                   ),
                                 ],
                               ),
-                            ],
-                          ),
-                        );
-                      },
-                    ),
-                  )),
-              20.ph,
-              _sectionTitle(
-                "My Next Consultation:",
-              ),
-              Obx(() => Column(
-                    children: [
-                      ...controller.consultations.map((m) => Container(
-                            padding: const EdgeInsets.all(8.0),
-                            margin: const EdgeInsets.symmetric(vertical: 7),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                border: Border.all(
-                                    color: AppColors.borderColor, width: 0.5)),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                  height: 30,
-                                  width: 30,
-                                  margin: EdgeInsets.all(8),
-                                  padding: EdgeInsets.all(4),
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(5),
-                                      color: AppColors.primaryColor
-                                          .withOpacity(0.05)),
-                                  child: Image.asset(
-                                      Assets.pngIconsAllConsultation),
-                                ),
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        m["appointment"]!,
-                                        style:
-                                            AppTextStyles.getLato(12, 6.weight),
-                                      ),
-                                      Text(
-                                        "with ${m["name"]!}",
-                                        style: AppTextStyles.getLato(
-                                            11, 4.weight, AppColors.hintColor),
-                                      ),
-                                      5.ph,
-                                      Container(
-                                        padding: EdgeInsets.all(5),
-                                        decoration: BoxDecoration(
-                                            color: AppColors.primaryColor
-                                                .withOpacity(0.05),
-                                            borderRadius:
-                                                BorderRadius.circular(5)),
-                                        child: Text(
-                                          "${m["date"]}",
-                                          style: AppTextStyles.getLato(
-                                              10, 4.weight),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: AppColors.primaryColor,
-                                    elevation: 0,
-                                    padding: EdgeInsets.zero,
-                                    fixedSize: Size(105, 30),
-                                    side: BorderSide(
-                                        color: AppColors.primaryColor,
-                                        width: 0.5),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(5),
-                                    ),
-                                  ),
-                                  onPressed: () {
-                                    Get.to(() => CallScreen(
-                                        name: "${m['name']}",
-                                        image: Assets.pngIconsDp2));
-                                  },
-                                  child: Text(
-                                    "Join Video Call",
-                                    style: AppTextStyles.getLato(
-                                        12, 6.weight, Colors.white),
-                                  ),
-                                ),
-                              ],
                             ),
-                          )),
-                    ],
-                  )),
-              10.ph,
-              _sectionTitle(
-                "Community Hub:",
-              ),
-              10.ph,
-              SizedBox(
-                height: 210,
-                width: context.width,
-                child: GridView.count(
-                  crossAxisCount: 2,
-                  childAspectRatio: 2,
-                  mainAxisSpacing: 12,
-                  physics: NeverScrollableScrollPhysics(),
-                  crossAxisSpacing: 12,
-                  children: controller.communityHub.map((opt) {
-                    return GestureDetector(
-                      onTap: () {},
-                      child: Container(
-                        padding: EdgeInsets.all(15),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          border: Border.all(
-                              width: 0.5, color: AppColors.borderColor),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                Container(
-                                  padding: EdgeInsets.all(5),
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(5),
-                                      color: opt['type'] == "Trend"
-                                          ? Color(0xffF4822C).withOpacity(0.05)
-                                          : AppColors.primaryColor
-                                              .withOpacity(0.05)),
-                                  child: Center(
-                                    child: Text(
-                                      opt['type']!,
-                                      style: AppTextStyles.getLato(
-                                          11,
-                                          5.weight,
-                                          opt['type'] == "Trend"
-                                              ? Color(0xffF4822C)
-                                              : AppColors.primaryColor),
-                                    ),
-                                  ),
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: AppColors.primaryColor,
+                                elevation: 0,
+                                padding: EdgeInsets.zero,
+                                fixedSize: Size(105, 30),
+                                side: BorderSide(
+                                  color: AppColors.primaryColor,
+                                  width: 0.5,
                                 ),
-                              ],
-                            ),
-                            5.ph,
-                            Text(opt["title"]!,
-                                style:
-                                    AppTextStyles.getLato(12, FontWeight.w600)),
-                            5.ph,
-                            Text(opt["replies"]!,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                              ),
+                              onPressed: () {
+                                Get.to(
+                                  () => CallScreen(
+                                    name: "${m['name']}",
+                                    image: Assets.pngIconsDp2,
+                                  ),
+                                );
+                              },
+                              child: Text(
+                                "Join Video Call",
                                 style: AppTextStyles.getLato(
-                                    11, FontWeight.w400, AppColors.hintColor),
-                                textAlign: TextAlign.center),
+                                  12,
+                                  6.weight,
+                                  Colors.white,
+                                ),
+                              ),
+                            ),
                           ],
                         ),
                       ),
-                    );
-                  }).toList(),
+                    ),
+                  ],
                 ),
+              ),
+              10.ph,
+              _sectionTitle("Community Hub:"),
+              10.ph,
+              GridView.count(
+                crossAxisCount: 2,
+                childAspectRatio: 1.6,
+                shrinkWrap: true,
+                mainAxisSpacing: 12,
+                physics: NeverScrollableScrollPhysics(),
+                crossAxisSpacing: 12,
+                children: controller.communityHub.map((opt) {
+                  return GestureDetector(
+                    onTap: () {},
+                    child: Container(
+                      padding: EdgeInsets.all(15),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        border: Border.all(
+                          width: 0.5,
+                          color: AppColors.borderColor,
+                        ),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Container(
+                                padding: EdgeInsets.all(5),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),
+                                  color: opt['type'] == "Trend"
+                                      ? Color(0xffF4822C).withOpacity(0.05)
+                                      : AppColors.primaryColor.withOpacity(
+                                          0.05,
+                                        ),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    opt['type']!,
+                                    style: AppTextStyles.getLato(
+                                      11,
+                                      5.weight,
+                                      opt['type'] == "Trend"
+                                          ? Color(0xffF4822C)
+                                          : AppColors.primaryColor,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          5.ph,
+                          Text(
+                            opt["title"]!,
+                            style: AppTextStyles.getLato(12, FontWeight.w600),
+                          ),
+                          5.ph,
+                          Text(
+                            opt["replies"]!,
+                            style: AppTextStyles.getLato(
+                              11,
+                              FontWeight.w400,
+                              AppColors.hintColor,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                }).toList(),
               ),
               20.ph,
               Center(
@@ -325,12 +351,15 @@ class AmputeeDashboardScreen extends StatelessWidget {
                   onPressed: () {
                     Get.to(() => ForumScreen());
                   },
-                  textStyle:
-                      AppTextStyles.getLato(12, 6.weight, AppColors.whiteColor),
+                  textStyle: AppTextStyles.getLato(
+                    12,
+                    6.weight,
+                    AppColors.whiteColor,
+                  ),
                   text: "Go to Forms",
                 ),
               ),
-              20.ph,
+              30.ph,
             ],
           ),
         ),
@@ -357,10 +386,7 @@ class AmputeeDashboardScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(5),
                 color: AppColors.primaryColor.withOpacity(0.05),
               ),
-              child: Icon(
-                Icons.menu,
-                color: AppColors.primaryColor,
-              ),
+              child: Icon(Icons.menu, color: AppColors.primaryColor),
             ),
           );
         },
@@ -374,35 +400,35 @@ class AmputeeDashboardScreen extends StatelessWidget {
       ),
       actions: [
         GestureDetector(
-            child: Container(
-              height: 40,
-              width: 40,
-              margin: EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  color: AppColors.primaryColor.withOpacity(0.05)),
-              child: Icon(
-                Icons.add,
-                size: 30,
-                color: AppColors.primaryColor,
-              ),
+          child: Container(
+            height: 40,
+            width: 40,
+            margin: EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              color: AppColors.primaryColor.withOpacity(0.05),
             ),
-            onTap: () => _showQuickActions(context)),
+            child: Icon(Icons.add, size: 30, color: AppColors.primaryColor),
+          ),
+          onTap: () => _showQuickActions(context),
+        ),
         GestureDetector(
-            child: Container(
-              height: 40,
-              width: 40,
-              margin: EdgeInsets.all(8),
-              padding: EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  color: AppColors.primaryColor.withOpacity(0.05)),
-              child: Image.asset(
-                Assets.pngIconsBell,
-                color: AppColors.primaryColor,
-              ),
+          child: Container(
+            height: 40,
+            width: 40,
+            margin: EdgeInsets.all(8),
+            padding: EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              color: AppColors.primaryColor.withOpacity(0.05),
             ),
-            onTap: () => Get.to(() => AmputeeNotificationsScreen())),
+            child: Image.asset(
+              Assets.pngIconsBell,
+              color: AppColors.primaryColor,
+            ),
+          ),
+          onTap: () => Get.to(() => AmputeeNotificationsScreen()),
+        ),
         10.pw,
       ],
     );
@@ -493,23 +519,32 @@ class AmputeeDashboardScreen extends StatelessWidget {
             shrinkWrap: true,
             crossAxisCount: 2,
             crossAxisSpacing: 15,
-            childAspectRatio: 1,
+            childAspectRatio: 0.9,
             children: [
               _quickAction(
-                  Assets.pngIconsBrowseProsthetic, "Browse Prosthetics", () {
-                Get.off(() => BrowseProstheticsScreen());
-              }),
-              _quickAction(Assets.pngIconsBookConsultation, "Book Consultation",
-                  () {
-                Get.off(() => ConsultationFlow());
-              }),
+                Assets.pngIconsBrowseProsthetic,
+                "Browse Prosthetics",
+                () {
+                  Get.off(() => BrowseProstheticsScreen());
+                },
+              ),
+              _quickAction(
+                Assets.pngIconsBookConsultation,
+                "Book Consultation",
+                () {
+                  Get.off(() => ConsultationFlow());
+                },
+              ),
               _quickAction(Assets.pngIconsTrackOrder, "Track Orders", () {
                 Get.off(() => TrackOrderListScreen());
               }),
-              _quickAction(Assets.pngIconsCommunityForms, "Community Forms",
-                  () {
-                Get.off(() => ForumScreen());
-              }),
+              _quickAction(
+                Assets.pngIconsCommunityForms,
+                "Community Forms",
+                () {
+                  Get.off(() => ForumScreen());
+                },
+              ),
             ],
           ),
         ),
@@ -524,8 +559,9 @@ class AmputeeDashboardScreen extends StatelessWidget {
         padding: const EdgeInsets.all(12),
         margin: const EdgeInsets.symmetric(vertical: 7),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5),
-            border: Border.all(color: AppColors.borderColor, width: 0.5)),
+          borderRadius: BorderRadius.circular(5),
+          border: Border.all(color: AppColors.borderColor, width: 0.5),
+        ),
         child: Center(
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -556,24 +592,34 @@ class AmputeeDashboardScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Container(
-                    height: 22,
-                    width: 22,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        color: AppColors.primaryColor.withOpacity(0.05)),
-                    child: Icon(Icons.chevron_left,
-                        size: 18, color: AppColors.primaryColor)),
+                  height: 22,
+                  width: 22,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    color: AppColors.primaryColor.withOpacity(0.05),
+                  ),
+                  child: Icon(
+                    Icons.chevron_left,
+                    size: 18,
+                    color: AppColors.primaryColor,
+                  ),
+                ),
                 5.pw,
                 Container(
-                    height: 22,
-                    width: 22,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        color: AppColors.primaryColor),
-                    child: Icon(Icons.chevron_right,
-                        size: 18, color: AppColors.whiteColor)),
+                  height: 22,
+                  width: 22,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    color: AppColors.primaryColor,
+                  ),
+                  child: Icon(
+                    Icons.chevron_right,
+                    size: 18,
+                    color: AppColors.whiteColor,
+                  ),
+                ),
               ],
-            )
+            ),
         ],
       ),
     );
@@ -586,10 +632,7 @@ class AmputeeDashboardScreen extends StatelessWidget {
         decoration: InputDecoration(
           hintText: 'Search Here...',
           hintStyle: AppTextStyles.getLato(13, 4.weight, Color(0xffA6A6A6)),
-          prefixIcon: Icon(
-            Icons.search,
-            color: Color(0xffA6A6A6),
-          ),
+          prefixIcon: Icon(Icons.search, color: Color(0xffA6A6A6)),
           filled: false,
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(5),
